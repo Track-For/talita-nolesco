@@ -283,6 +283,8 @@ function FieldPlane() {
   const pointer = useRef(new THREE.Vector2(0, 0));
   const pointerTarget = useRef(new THREE.Vector2(0, 0));
   const hovering = useRef(false);
+  const activeTouch = useRef<number | null>(null);
+  const touchReleaseTimer = useRef<number | null>(null);
   const { gl, size, viewport } = useThree();
 
   useEffect(() => {
@@ -322,8 +324,7 @@ function FieldPlane() {
     const region = gl.domElement.closest(".pause-section") as HTMLElement | null;
     if (!region) return;
 
-    const updatePointer = (event: PointerEvent) => {
-      if (event.pointerType === "touch") return;
+    const updatePointerPosition = (event: PointerEvent) => {
       const bounds = region.getBoundingClientRect();
       const isInside =
         event.clientX >= bounds.left &&
@@ -331,26 +332,69 @@ function FieldPlane() {
         event.clientY >= bounds.top &&
         event.clientY <= bounds.bottom;
 
-      hovering.current = isInside;
-      if (!isInside) return;
+      if (!isInside) {
+        hovering.current = false;
+        return false;
+      }
 
       pointerTarget.current.set(
         ((event.clientX - bounds.left) / bounds.width) * 2 - 1,
         -((event.clientY - bounds.top) / bounds.height) * 2 + 1,
       );
-    };
-    const clearPointer = () => {
-      hovering.current = false;
+      return true;
     };
 
-    window.addEventListener("pointermove", updatePointer, { passive: true });
+    const handlePointerMove = (event: PointerEvent) => {
+      const isTouch = event.pointerType === "touch";
+      if (isTouch && activeTouch.current !== event.pointerId) return;
+      hovering.current = updatePointerPosition(event);
+    };
+
+    const handlePointerDown = (event: PointerEvent) => {
+      if (event.pointerType !== "touch" && event.pointerType !== "pen") return;
+      if (touchReleaseTimer.current !== null) {
+        window.clearTimeout(touchReleaseTimer.current);
+        touchReleaseTimer.current = null;
+      }
+      activeTouch.current = event.pointerId;
+      hovering.current = updatePointerPosition(event);
+    };
+
+    const handlePointerUp = (event: PointerEvent) => {
+      if (activeTouch.current !== event.pointerId) return;
+      activeTouch.current = null;
+      touchReleaseTimer.current = window.setTimeout(() => {
+        hovering.current = false;
+        touchReleaseTimer.current = null;
+      }, 360);
+    };
+
+    const clearPointer = () => {
+      activeTouch.current = null;
+      hovering.current = false;
+      if (touchReleaseTimer.current !== null) {
+        window.clearTimeout(touchReleaseTimer.current);
+        touchReleaseTimer.current = null;
+      }
+    };
+
+    region.addEventListener("pointerdown", handlePointerDown, { passive: true });
+    window.addEventListener("pointermove", handlePointerMove, { passive: true });
+    window.addEventListener("pointerup", handlePointerUp, { passive: true });
+    window.addEventListener("pointercancel", handlePointerUp, { passive: true });
     window.addEventListener("blur", clearPointer);
     document.addEventListener("mouseleave", clearPointer);
 
     return () => {
-      window.removeEventListener("pointermove", updatePointer);
+      region.removeEventListener("pointerdown", handlePointerDown);
+      window.removeEventListener("pointermove", handlePointerMove);
+      window.removeEventListener("pointerup", handlePointerUp);
+      window.removeEventListener("pointercancel", handlePointerUp);
       window.removeEventListener("blur", clearPointer);
       document.removeEventListener("mouseleave", clearPointer);
+      if (touchReleaseTimer.current !== null) {
+        window.clearTimeout(touchReleaseTimer.current);
+      }
     };
   }, [gl]);
 

@@ -61,6 +61,7 @@ export function ApproachJourney() {
               key={concept.title}
               style={
                 {
+                  "--approach-index": index,
                   "--approach-start": START_HEIGHTS[index],
                 } as CSSProperties
               }

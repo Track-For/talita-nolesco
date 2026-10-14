@@ -28,24 +28,16 @@ export function OrganicFieldScene() {
 
   useEffect(() => {
     const reduced = window.matchMedia("(prefers-reduced-motion: reduce)");
-    const coarse = window.matchMedia("(pointer: coarse)");
-    const wide = window.matchMedia("(min-width: 900px)");
 
     const update = () => {
-      setEligible(
-        !reduced.matches && !coarse.matches && wide.matches && supportsWebGL(),
-      );
+      setEligible(!reduced.matches && supportsWebGL());
     };
 
     update();
-    [reduced, coarse, wide].forEach((media) =>
-      media.addEventListener("change", update),
-    );
+    reduced.addEventListener("change", update);
 
     return () => {
-      [reduced, coarse, wide].forEach((media) =>
-        media.removeEventListener("change", update),
-      );
+      reduced.removeEventListener("change", update);
     };
   }, []);
 

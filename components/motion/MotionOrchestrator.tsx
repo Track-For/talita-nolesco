@@ -394,9 +394,6 @@ export function MotionOrchestrator({ children }: { children: ReactNode }) {
             "[data-cinema-frame]",
           );
           const image = frame?.querySelector<HTMLElement>("img");
-          const cinemaCurtain = frame?.querySelector<HTMLElement>(
-            "[data-image-curtain]",
-          );
           const backdrop = bridge?.querySelector<HTMLElement>(
             "[data-cinema-backdrop]",
           );
@@ -448,15 +445,6 @@ export function MotionOrchestrator({ children }: { children: ReactNode }) {
                 { scale: 1.01, duration: 1.15, ease: "none" },
                 0,
               );
-
-            if (cinemaCurtain) {
-              cinemaTimeline.fromTo(
-                cinemaCurtain,
-                { yPercent: 0 },
-                { yPercent: 101, duration: 0.58, ease: "none" },
-                0.06,
-              );
-            }
 
             cinemaTimeline
               .fromTo(
@@ -596,6 +584,28 @@ export function MotionOrchestrator({ children }: { children: ReactNode }) {
           }
         });
 
+        media.add("(max-width: 900px)", () => {
+          const approachCards = gsap.utils.toArray<HTMLElement>(
+            "[data-approach-concept]",
+            scope,
+          );
+
+          approachCards.slice(0, -1).forEach((card, index) => {
+            gsap.to(card, {
+              scale: 0.94,
+              opacity: 0.58,
+              transformOrigin: "center top",
+              ease: "none",
+              scrollTrigger: {
+                trigger: approachCards[index + 1],
+                start: "top 84%",
+                end: "top 18%",
+                scrub: 0.65,
+              },
+            });
+          });
+        });
+
         media.add("(min-width: 768px)", () => {
           gsap.utils
             .toArray<HTMLElement>("[data-parallax]", scope)
@@ -618,23 +628,24 @@ export function MotionOrchestrator({ children }: { children: ReactNode }) {
                 },
               );
             });
+        });
 
-          const servicePanels = gsap.utils.toArray<HTMLElement>(
-            "[data-service-panel]",
-            scope,
-          );
-          servicePanels.slice(0, -1).forEach((panel, index) => {
-            gsap.to(panel, {
-              scale: 0.94,
-              opacity: 0.58,
-              ease: "none",
-              scrollTrigger: {
-                trigger: servicePanels[index + 1],
-                start: "top 78%",
-                end: "top 18%",
-                scrub: true,
-              },
-            });
+        const servicePanels = gsap.utils.toArray<HTMLElement>(
+          "[data-service-panel]",
+          scope,
+        );
+        servicePanels.slice(0, -1).forEach((panel, index) => {
+          gsap.to(panel, {
+            scale: 0.94,
+            opacity: 0.58,
+            transformOrigin: "center top",
+            ease: "none",
+            scrollTrigger: {
+              trigger: servicePanels[index + 1],
+              start: "top 78%",
+              end: "top 18%",
+              scrub: 0.65,
+            },
           });
         });
 

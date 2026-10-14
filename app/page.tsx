@@ -257,7 +257,7 @@ export default function Home() {
                 pode começar pelo que ainda parece difícil de dizer
               </p>
               <span className="pause-section__hint" aria-hidden="true">
-                Mova o cursor para revelar
+                Toque ou mova o cursor para revelar
               </span>
             </div>
           </section>

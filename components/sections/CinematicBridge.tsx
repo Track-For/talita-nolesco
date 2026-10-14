@@ -16,7 +16,11 @@ export function CinematicBridge() {
           presença
         </p>
 
-        <figure className="cinematic-bridge__frame" data-cinema-frame>
+        <figure
+          className="cinematic-bridge__frame"
+          data-cinema-frame
+          data-image-reveal="down"
+        >
           <Image
             alt="Talita em um ambiente de atendimento, em momento de reflexão"
             fill

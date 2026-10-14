@@ -106,6 +106,36 @@ export function HorizontalReel() {
         },
       );
 
+      media.add(
+        "(max-width: 900px) and (prefers-reduced-motion: no-preference)",
+        () => {
+          const portrait = track.querySelector<HTMLElement>(
+            "[data-image-reveal='band-reel']",
+          );
+          const curtain = portrait?.querySelector<HTMLElement>(
+            "[data-image-curtain]",
+          );
+          if (!portrait || !curtain) return;
+
+          const reveal = gsap.fromTo(
+            curtain,
+            { xPercent: 0 },
+            {
+              xPercent: -101,
+              duration: 1.15,
+              ease: "power3.inOut",
+              scrollTrigger: {
+                trigger: portrait,
+                start: "top 88%",
+                once: true,
+              },
+            },
+          );
+
+          return () => reveal.kill();
+        },
+      );
+
       return () => media.revert();
     },
     { scope: root },

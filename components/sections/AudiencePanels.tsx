@@ -46,7 +46,9 @@ export function AudiencePanels() {
             </span>
             <span className="audience-panel__copy">
               <strong>{panel.title}</strong>
-              <span>{panel.text}</span>
+              <span>
+                <span>{panel.text}</span>
+              </span>
             </span>
           </button>
         ))}
