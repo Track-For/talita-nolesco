@@ -296,9 +296,14 @@ export function MotionOrchestrator({ children }: { children: ReactNode }) {
         const progressValue = scope.querySelector<HTMLElement>(
           "[data-cinema-progress-value]",
         );
+        const progressHud = scope.querySelector<HTMLElement>(".cinema-hud");
 
         const chapters = gsap.utils.toArray<HTMLElement>(
           "[data-chapter-label]",
+          scope,
+        );
+        const toneSections = gsap.utils.toArray<HTMLElement>(
+          "[data-header-tone]",
           scope,
         );
 
@@ -320,6 +325,19 @@ export function MotionOrchestrator({ children }: { children: ReactNode }) {
           }
           if (progressCurrent) {
             progressCurrent.textContent = active.dataset.chapterIndex ?? "";
+          }
+
+          const activeToneSection = toneSections.reduce((current, section) => {
+            return section.getBoundingClientRect().top <= marker
+              ? section
+              : current;
+          }, toneSections[0]);
+
+          if (progressHud && activeToneSection) {
+            progressHud.dataset.tone =
+              activeToneSection.dataset.headerTone === "dark"
+                ? "dark"
+                : "light";
           }
         };
 

@@ -23,7 +23,7 @@ export function WhatsAppContactForm({
       `Olá, Talita. Meu nome é ${name}.`,
       `Tenho interesse em: ${modality}.`,
       `Gostaria de conversar sobre: ${message}`,
-      "Preenchi estas informações pelo seu site.",
+      "Preenchi estas informações pelo seu site",
     ].join("\n\n");
 
     const whatsappUrl = `https://wa.me/${whatsappNumber}?text=${encodeURIComponent(whatsappMessage)}`;
@@ -79,14 +79,14 @@ export function WhatsAppContactForm({
         <input name="consent" required type="checkbox" />
         <span>
           Concordo em abrir o WhatsApp e enviar estas informações diretamente
-          para Talita.
+          para Talita
         </span>
       </label>
 
       <div className="whatsapp-form__footer">
         <p>
           Nada é enviado ou armazenado neste site. O WhatsApp abrirá em uma nova
-          aba para você revisar a mensagem antes do envio.
+          aba para você revisar a mensagem antes do envio
         </p>
         <button className="button button--solid" type="submit">
           <span>Abrir conversa no WhatsApp</span>

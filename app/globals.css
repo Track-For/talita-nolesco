@@ -190,16 +190,24 @@ img {
   left: clamp(0.7rem, 1.5vw, 1.7rem);
   display: grid;
   align-items: center;
-  color: white;
-  font-size: 0.58rem;
+  color: var(--plum-deep);
+  font-size: 0.67rem;
   font-variant-numeric: tabular-nums;
   font-weight: 750;
   gap: 0.75rem;
   letter-spacing: 0.14em;
-  mix-blend-mode: difference;
   pointer-events: none;
+  text-shadow: 0 1px 0 color-mix(in srgb, var(--paper) 76%, transparent);
   text-transform: uppercase;
   transform: translateY(-50%);
+  transition:
+    color 260ms ease,
+    text-shadow 260ms ease;
+}
+
+.cinema-hud[data-tone="dark"] {
+  color: var(--ivory);
+  text-shadow: 0 1px 0 color-mix(in srgb, var(--plum-deep) 76%, transparent);
 }
 
 .cinema-hud__percentage,
@@ -209,20 +217,35 @@ img {
 
 .cinema-hud__percentage {
   min-width: 2.7rem;
+  border-radius: 999px;
+  background: color-mix(in srgb, var(--paper) 84%, transparent);
+  box-shadow:
+    inset 0 0 0 1px color-mix(in srgb, var(--plum) 16%, transparent),
+    0 0.45rem 1.2rem color-mix(in srgb, var(--plum-deep) 9%, transparent);
+  padding: 0.28rem 0.4rem;
   text-align: center;
+  -webkit-backdrop-filter: blur(10px) saturate(130%);
+  backdrop-filter: blur(10px) saturate(130%);
+}
+
+.cinema-hud[data-tone="dark"] .cinema-hud__percentage {
+  background: color-mix(in srgb, var(--plum-deep) 68%, transparent);
+  box-shadow:
+    inset 0 0 0 1px color-mix(in srgb, var(--ivory) 22%, transparent),
+    0 0.45rem 1.2rem color-mix(in srgb, #0b0910 22%, transparent);
 }
 
 .cinema-hud__chapter {
   display: inline-flex;
   gap: 0.22rem;
-  opacity: 0.68;
+  opacity: 0.82;
 }
 
 .cinema-hud__rail {
   position: relative;
   display: block;
-  width: 1px;
-  height: clamp(12rem, 29vh, 19rem);
+  width: 2px;
+  height: clamp(13rem, 31vh, 21rem);
   justify-self: center;
   overflow: hidden;
   background: color-mix(in srgb, currentColor 28%, transparent);
@@ -724,13 +747,17 @@ h3 {
 .hero {
   position: relative;
   display: grid;
-  width: min(100%, var(--content-max));
+  width: 100%;
   min-height: 100dvh;
   align-items: center;
+  isolation: isolate;
   margin-inline: auto;
-  padding: calc(var(--header-height) + 1.2rem) var(--page-pad) 2.25rem;
-  grid-template-columns: minmax(0, 1.18fr) minmax(19rem, 0.82fr);
-  gap: clamp(2rem, 5vw, 6.5rem);
+  overflow: hidden;
+  padding:
+    calc(var(--header-height) + 1.2rem)
+    max(var(--page-pad), calc((100vw - var(--content-max)) / 2 + var(--page-pad)))
+    2.25rem;
+  grid-template-columns: minmax(0, 1fr);
 }
 
 .header-threshold {
@@ -751,6 +778,7 @@ h3 {
   opacity: 0.65;
   pointer-events: none;
   transform: rotate(21deg);
+  z-index: 2;
 }
 
 .hero__chapter {
@@ -766,6 +794,7 @@ h3 {
   gap: 0.75rem;
   letter-spacing: 0.15em;
   text-transform: uppercase;
+  z-index: 3;
 }
 
 .hero__chapter span:first-child {
@@ -795,6 +824,7 @@ h3 {
   gap: 0.7rem;
   letter-spacing: 0.16em;
   text-transform: uppercase;
+  z-index: 3;
 }
 
 .hero__scroll-cue i {
@@ -824,7 +854,8 @@ h3 {
 
 .hero__copy {
   position: relative;
-  z-index: 2;
+  z-index: 3;
+  width: min(58vw, 54rem);
   max-width: 54rem;
   padding-block: 1rem;
 }
@@ -860,7 +891,7 @@ h3 {
 .hero__description {
   max-width: 39rem;
   margin-block-end: 1.8rem;
-  color: var(--ink-muted);
+  color: color-mix(in srgb, var(--ink) 84%, transparent);
   font-size: clamp(1rem, 1.35vw, 1.2rem);
   line-height: 1.6;
 }
@@ -872,29 +903,42 @@ h3 {
 }
 
 .hero-portrait {
-  position: relative;
-  z-index: 1;
+  position: absolute;
+  z-index: 0;
+  inset: 0;
   width: 100%;
-  max-width: 35rem;
-  margin: 0 0 0 auto;
+  max-width: none;
+  height: 100%;
+  margin: 0;
 }
 
 .hero-portrait::before {
   position: absolute;
-  inset: -1.2rem -1.1rem 4rem 2.4rem;
-  z-index: -1;
-  border: 1px solid color-mix(in srgb, var(--plum) 23%, transparent);
-  border-radius: 52% 48% 32% 68% / 26% 39% 61% 74%;
+  z-index: 2;
+  inset: 0;
+  background: linear-gradient(
+    90deg,
+    color-mix(in srgb, var(--ivory) 99%, transparent) 0%,
+    color-mix(in srgb, var(--ivory) 94%, transparent) 24%,
+    color-mix(in srgb, var(--ivory) 64%, transparent) 48%,
+    color-mix(in srgb, var(--ivory) 14%, transparent) 69%,
+    transparent 82%
+  );
   content: "";
-  transform: rotate(3deg);
+  pointer-events: none;
 }
 
 .hero-portrait__frame {
-  position: relative;
-  height: clamp(29rem, 69dvh, 47rem);
+  position: absolute;
+  inset: 0;
+  height: 100%;
   overflow: hidden;
-  border-radius: 49% 51% 31% 69% / 24% 38% 62% 76%;
   background: var(--lavender);
+}
+
+.hero-portrait__frame picture {
+  position: absolute;
+  inset: 0;
 }
 
 .hero-portrait__frame img,
@@ -905,36 +949,26 @@ h3 {
 }
 
 .hero-portrait__frame img {
-  object-position: 49% 36%;
+  width: 100%;
+  height: 100%;
+  object-position: center center;
   transform: scale(1.06);
 }
 
 .hero-portrait__wash {
   position: absolute;
+  z-index: 1;
   inset: 0;
-  background: linear-gradient(
-    155deg,
-    transparent 55%,
-    color-mix(in srgb, var(--plum) 26%, transparent)
-  );
+  background:
+    linear-gradient(
+      180deg,
+      color-mix(in srgb, var(--ivory) 22%, transparent),
+      transparent 35%,
+      color-mix(in srgb, var(--plum-deep) 15%, transparent)
+    ),
+    linear-gradient(110deg, transparent 60%, color-mix(in srgb, var(--plum) 10%, transparent));
   mix-blend-mode: multiply;
   pointer-events: none;
-}
-
-.hero-portrait figcaption {
-  display: flex;
-  align-items: baseline;
-  justify-content: space-between;
-  gap: 1rem;
-  padding-block-start: 0.85rem;
-  color: var(--ink-muted);
-  font-size: 0.68rem;
-  letter-spacing: 0.04em;
-}
-
-.hero-portrait figcaption span:first-child {
-  color: var(--ink);
-  font-weight: 750;
 }
 
 /* Story thread */
@@ -995,27 +1029,27 @@ h3 {
   position: relative;
   display: grid;
   align-items: end;
-  padding-block: clamp(8rem, 15vw, 13rem);
-  grid-template-columns: minmax(0, 1fr) minmax(13rem, 0.26fr);
-  gap: clamp(3rem, 8vw, 8rem);
+  padding-block: clamp(7rem, 11vw, 10rem);
+  grid-template-columns: minmax(0, 1fr) minmax(15rem, 0.24fr);
+  gap: clamp(2.5rem, 5vw, 5rem);
 }
 
 .manifesto {
-  max-width: 17ch;
+  max-width: none;
   margin: 0;
   font-family: var(--font-cormorant), serif;
-  font-size: clamp(3.3rem, 7.2vw, 8.2rem);
+  font-size: clamp(4rem, 7.8vw, 9.2rem);
   font-weight: 400;
   letter-spacing: -0.045em;
   line-height: 0.86;
 }
 
 .manifesto-note {
-  max-width: 26ch;
+  max-width: 29ch;
   margin: 0;
   color: color-mix(in srgb, var(--ivory) 67%, transparent);
-  font-size: 0.82rem;
-  line-height: 1.75;
+  font-size: clamp(1rem, 1.15vw, 1.16rem);
+  line-height: 1.6;
 }
 
 /* Cinematic bridge */
@@ -1220,12 +1254,12 @@ h3 {
 
 .formation-list h3 {
   font-family: var(--font-cormorant), serif;
-  font-size: 1.35rem;
+  font-size: clamp(1.48rem, 1.65vw, 1.78rem);
 }
 
 .formation-list p {
   color: var(--ink-muted);
-  font-size: 0.78rem;
+  font-size: clamp(0.88rem, 0.95vw, 0.98rem);
 }
 
 /* Audience */
@@ -1235,13 +1269,20 @@ h3 {
 }
 
 .section-heading {
-  max-width: 52rem;
+  max-width: 72rem;
   margin-block-end: clamp(3rem, 6vw, 6rem);
 }
 
 .section-heading > p {
   max-width: 46ch;
   color: var(--ink-muted);
+  font-size: clamp(1.05rem, 1.25vw, 1.22rem);
+}
+
+.audience-section .section-heading h2 {
+  max-width: 10ch;
+  font-size: clamp(4.5rem, 8.4vw, 9.6rem);
+  line-height: 0.88;
 }
 
 .audience-layout {
@@ -1309,7 +1350,7 @@ h3 {
 .audience-panel__copy strong {
   max-width: 32ch;
   font-family: var(--font-cormorant), serif;
-  font-size: clamp(1.42rem, 2.2vw, 2.35rem);
+  font-size: clamp(1.6rem, 2.5vw, 2.7rem);
   font-weight: 500;
   letter-spacing: -0.025em;
   line-height: 1.08;
@@ -1321,7 +1362,7 @@ h3 {
   max-width: 55ch;
   overflow: hidden;
   color: var(--ink-muted);
-  font-size: 0.8rem;
+  font-size: clamp(0.92rem, 1vw, 1.02rem);
   grid-template-rows: 0fr;
   opacity: 0;
   transition:
@@ -2014,7 +2055,7 @@ h3 {
   max-width: 51ch;
   margin: 0;
   color: color-mix(in srgb, currentColor 72%, transparent);
-  font-size: 0.85rem;
+  font-size: clamp(0.94rem, 1vw, 1.02rem);
 }
 
 /* FAQ */
@@ -2091,7 +2132,7 @@ details[open] .faq-icon::after {
   max-width: 62ch;
   margin-block: 0;
   color: var(--ink-muted);
-  font-size: 0.88rem;
+  font-size: clamp(0.96rem, 1vw, 1.04rem);
   padding: 0 3rem 1.8rem 0;
 }
 
@@ -2678,8 +2719,7 @@ details[open] .faq-icon::after {
 
 @media (min-width: 901px) and (max-width: 1200px) {
   .hero {
-    grid-template-columns: minmax(0, 1.15fr) minmax(18rem, 0.7fr);
-    gap: 1.25rem;
+    grid-template-columns: minmax(0, 1fr);
   }
 
   .hero h1 {
@@ -2695,11 +2735,11 @@ details[open] .faq-icon::after {
   }
 
   .hero-portrait {
-    max-width: 26rem;
+    max-width: none;
   }
 
   .hero-portrait__frame {
-    height: min(68dvh, 39rem);
+    height: 100%;
   }
 }
 
@@ -2717,12 +2757,17 @@ details[open] .faq-icon::after {
     line-height: 0.98;
   }
 
+  .audience-section .section-heading h2 {
+    max-width: 9ch;
+    font-size: clamp(3.35rem, 16vw, 5.4rem);
+    line-height: 0.9;
+  }
+
   .hero {
     min-height: 100dvh;
     align-items: start;
     padding-block: calc(var(--header-height) + 2.2rem) 2rem;
     grid-template-columns: 1fr;
-    gap: 2.2rem;
   }
 
   .hero__ornament {
@@ -2740,6 +2785,8 @@ details[open] .faq-icon::after {
   }
 
   .hero__copy {
+    width: 100%;
+    max-width: 40rem;
     padding: 1.7rem 0 0;
   }
 
@@ -2778,24 +2825,34 @@ details[open] .faq-icon::after {
   }
 
   .hero-portrait {
-    width: 93%;
+    width: 100%;
     max-width: none;
-    margin-inline: auto;
+    height: 100%;
+    margin: 0;
   }
 
   .hero-portrait__frame {
-    height: min(56dvh, 33rem);
-    border-radius: 46% 54% 34% 66% / 25% 41% 59% 75%;
+    height: 100%;
   }
 
   .hero-portrait__frame img {
-    object-position: 50% 32%;
+    object-position: 62% center;
   }
 
-  .hero-portrait figcaption {
-    align-items: flex-start;
-    flex-direction: column;
-    gap: 0.15rem;
+  .hero-portrait::before {
+    background:
+      linear-gradient(
+        180deg,
+        color-mix(in srgb, var(--ivory) 98%, transparent) 0%,
+        color-mix(in srgb, var(--ivory) 93%, transparent) 38%,
+        color-mix(in srgb, var(--ivory) 54%, transparent) 66%,
+        color-mix(in srgb, var(--plum-deep) 14%, transparent) 100%
+      ),
+      linear-gradient(
+        90deg,
+        color-mix(in srgb, var(--ivory) 68%, transparent),
+        transparent 86%
+      );
   }
 
   .organic-thread {
@@ -3147,7 +3204,7 @@ details[open] .faq-icon::after {
   }
 
   .hero-portrait__frame {
-    height: 29rem;
+    height: 100%;
   }
 
   .audience-panel__copy strong {
@@ -3169,7 +3226,7 @@ details[open] .faq-icon::after {
   }
 
   .hero-portrait__frame {
-    height: 37rem;
+    height: 100%;
   }
 }
 

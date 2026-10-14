@@ -1,5 +1,5 @@
 import Image from "next/image";
-import talitaPensante from "@/public/images/optimized/talita-pensante.webp";
+import talitaPensante from "@/public/images/optimized/talita-pensante-hq.webp";
 
 export function CinematicBridge() {
   return (
@@ -25,9 +25,9 @@ export function CinematicBridge() {
             alt="Talita em um ambiente de atendimento, em momento de reflexão"
             fill
             placeholder="blur"
+            quality={90}
             sizes="(max-width: 900px) 92vw, 78vw"
             src={talitaPensante}
-            unoptimized
           />
           <span
             aria-hidden="true"

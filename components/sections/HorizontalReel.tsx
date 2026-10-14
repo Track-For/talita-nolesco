@@ -4,7 +4,7 @@ import Image from "next/image";
 import { useRef } from "react";
 import { useGSAP } from "@gsap/react";
 import { gsap } from "@/lib/gsap";
-import talitaPensante from "@/public/images/optimized/talita-pensante.webp";
+import talitaPensante from "@/public/images/optimized/talita-pensante-hq.webp";
 
 const scenes = [
   {
@@ -158,9 +158,9 @@ export function HorizontalReel() {
                   alt="Talita em momento de reflexão"
                   fill
                   placeholder="blur"
+                  quality={90}
                   sizes="(max-width: 900px) 100vw, 40vw"
                   src={talitaPensante}
-                  unoptimized
                 />
                 <span
                   aria-hidden="true"

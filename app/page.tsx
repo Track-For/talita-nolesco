@@ -1,4 +1,4 @@
-import Image from "next/image";
+import Image, { getImageProps } from "next/image";
 import { AudiencePanels } from "@/components/sections/AudiencePanels";
 import { ApproachJourney } from "@/components/sections/ApproachJourney";
 import { Footer } from "@/components/layout/Footer";
@@ -16,8 +16,10 @@ import { OrganicFieldScene } from "@/components/webgl/OrganicFieldScene";
 import { faq } from "@/data/faq";
 import { visibleServices } from "@/data/services";
 import { journey, talita } from "@/data/talita";
-import talitaCadeira from "@/public/images/optimized/talita-na-cadeira.webp";
-import talitaSorrindo from "@/public/images/optimized/talita-sorrindo.webp";
+import talitaCadeira from "@/public/images/optimized/talita-na-cadeira-hq.webp";
+import talitaHero from "@/public/images/optimized/talita-hero-wide-hq.webp";
+import talitaHeroMobile from "@/public/images/optimized/talita-hero-mobile-lower-hq.webp";
+import talitaSorrindo from "@/public/images/optimized/talita-sorrindo-hq.webp";
 
 function HeroTitle() {
   const lines = ["Psicoterapia online", "para mulheres"];
@@ -34,6 +36,25 @@ function HeroTitle() {
         </span>
       ))}
     </h1>
+  );
+}
+
+function HeroPortraitImage() {
+  const alt = "Talita F. Nolasco sorrindo, sentada em um ambiente acolhedor";
+  const common = { alt, quality: 90, sizes: "100vw" } as const;
+  const {
+    props: { srcSet: desktop },
+  } = getImageProps({ ...common, src: talitaHero });
+  const {
+    props: { srcSet: mobile, ...rest },
+  } = getImageProps({ ...common, src: talitaHeroMobile });
+
+  return (
+    <picture>
+      <source media="(min-width: 901px)" srcSet={desktop} />
+      <source media="(max-width: 900px)" srcSet={mobile} />
+      <img {...rest} alt={alt} fetchPriority="high" loading="eager" />
+    </picture>
   );
 }
 
@@ -76,16 +97,7 @@ export default function Home() {
 
           <figure className="hero-portrait">
             <div className="hero-portrait__frame" data-hero-photo data-parallax>
-              <Image
-                alt="Talita F. Nolasco sorrindo, sentada em um ambiente acolhedor"
-                fill
-                fetchPriority="high"
-                loading="eager"
-                placeholder="blur"
-                sizes="(max-width: 900px) 92vw, (max-width: 1199px) 40vw, 42vw"
-                src={talitaSorrindo}
-                unoptimized
-              />
+              <HeroPortraitImage />
               <span
                 aria-hidden="true"
                 className="image-curtain image-curtain--down"
@@ -93,10 +105,6 @@ export default function Home() {
               />
               <span className="hero-portrait__wash" aria-hidden="true" />
             </div>
-            <figcaption>
-              <span>{talita.name}</span>
-              <span>Psicóloga, CRP em confirmação</span>
-            </figcaption>
           </figure>
           <div className="hero__scroll-cue" data-hero-chapter aria-hidden="true">
             <span>continue</span>
@@ -155,9 +163,9 @@ export default function Home() {
                   alt="Talita sentada em uma cadeira, em retrato profissional"
                   fill
                   placeholder="blur"
+                  quality={90}
                   sizes="(max-width: 900px) 100vw, 38vw"
                   src={talitaCadeira}
-                  unoptimized
                 />
                 <span
                   aria-hidden="true"
@@ -340,7 +348,7 @@ export default function Home() {
                 <h2>Conte um pouco do que você procura</h2>
                 <p>
                   Preencha os campos para preparar sua mensagem. Você poderá
-                  revisar tudo no WhatsApp antes de enviar.
+                  revisar tudo no WhatsApp antes de enviar
                 </p>
               </div>
               <div data-reveal>
@@ -362,9 +370,9 @@ export default function Home() {
                 alt="Talita sorrindo em retrato acolhedor"
                 fill
                 placeholder="blur"
+                quality={90}
                 sizes="(max-width: 900px) 100vw, 42vw"
                 src={talitaSorrindo}
-                unoptimized
               />
               <span
                 aria-hidden="true"
@@ -380,7 +388,7 @@ export default function Home() {
               />
               <p className="contact-section__lead">
                 Conheça as modalidades de psicoterapia online e converse sobre
-                a possibilidade de iniciar seu acompanhamento.
+                a possibilidade de iniciar seu acompanhamento
               </p>
               {talita.contact.href ? (
                 <MagneticLink href={talita.contact.href} variant="light">

@@ -13,14 +13,14 @@ export const talita = {
   hero: {
     title: "Psicoterapia online para mulheres.",
     description:
-      "Um espaço de escuta para compreender emoções, relações e escolhas com mais clareza e acolhimento.",
+      "Um espaço de escuta para compreender emoções, relações e escolhas com mais clareza e acolhimento",
     status: "provisorio" as ContentStatus,
   },
   about: {
     title: "Uma trajetória dedicada à escuta e ao cuidado.",
     paragraphs: [
-      "Formada em Psicologia pela Universidade Católica de Santos, Talita construiu sua trajetória profissional em diferentes espaços de cuidado, incluindo a atuação no CAPS e a facilitação de grupos.",
-      "Seus estudos em Logoterapia e Análise Existencial ampliam uma prática atenta à história, aos vínculos, às escolhas e aos sentidos que cada pessoa constrói ao longo da vida.",
+      "Formada em Psicologia pela Universidade Católica de Santos, Talita construiu sua trajetória profissional em diferentes espaços de cuidado, incluindo a atuação no CAPS e a facilitação de grupos",
+      "Seus estudos em Logoterapia e Análise Existencial ampliam uma prática atenta à história, aos vínculos, às escolhas e aos sentidos que cada pessoa constrói ao longo da vida",
     ],
     status: "provisorio" as ContentStatus,
   },

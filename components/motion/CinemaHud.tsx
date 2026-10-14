@@ -2,7 +2,7 @@ export function CinemaHud() {
   return (
     <>
       <div className="film-texture" aria-hidden="true" />
-      <aside className="cinema-hud" aria-hidden="true">
+      <aside className="cinema-hud" aria-hidden="true" data-tone="light">
         <span className="cinema-hud__percentage" data-cinema-progress-value>
           0%
         </span>
