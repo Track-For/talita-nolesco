@@ -19,10 +19,10 @@
 
 - A visitante é a protagonista; Talita aparece como guia profissional. A copy evita diagnóstico, promessa de cura, prazo de resultado, escassez e urgência promocional.
 - Somente psicoterapia individual online e psicoterapia em grupo online aparecem como modalidades atuais. Os serviços do site anterior continuam estruturados como pendentes e ocultos.
-- CRP, formação, trajetória, abordagem e fluxo de contato aparecem com aviso de validação quando necessário.
-- O CTA final permanece desabilitado até existir um contato profissional validado.
+- CRP, formação, trajetória e abordagem aparecem com aviso de validação quando necessário.
+- O CTA final e o formulário direcionam para o WhatsApp profissional informado pela cliente.
 - Guia gratuito e redes sociais têm componentes prontos, mas ficam ocultos enquanto não houver arquivos ou URLs reais.
-- Não foi adicionado formulário, analytics, pixel, armazenamento de dados ou integração de terceiros.
+- O formulário prepara a mensagem localmente e abre o WhatsApp. Não há envio para servidor próprio, armazenamento, analytics ou pixel.
 
 ## Movimento e performance
 
@@ -51,7 +51,7 @@
 - `prefers-reduced-motion` remove pinning, parallax, WebGL animado e revelações, mantendo todo o conteúdo.
 - A página possui um único H1, headings em ordem, textos no DOM, imagens com alt e FAQ em `details/summary` nativo.
 - O protótipo permanece `noindex` e o `robots.txt` bloqueia rastreamento enquanto não houver domínio e aprovação. Sitemap e canonical só devem ser habilitados com `NEXT_PUBLIC_SITE_URL` definido.
-- JSON-LD foi omitido porque CRP, endereço, contato e demais dados profissionais ainda não foram validados.
+- JSON-LD foi omitido porque CRP, endereço e demais dados profissionais ainda não foram validados.
 
 ## Stack
 

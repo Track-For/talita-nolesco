@@ -33,7 +33,7 @@
 | 15 | Completo | Jornada de primeiro contato em quatro cards com fluxo provisório e sem prazo prometido. | Abrir `#primeiro-contato`; ler os quatro passos e conferir o empilhamento responsivo. |
 | 16 | Fallback | Componente do guia implementado, mas não renderizado porque arquivo/URL não foi fornecido. | Informar um `href` real em `data/talita.ts`; a vitrine passa a aparecer. |
 | 17 | Completo | FAQ nativo com teclado, foco, animação de ícone e respostas sem dados operacionais inventados. | Abrir `#duvidas`; alternar itens por mouse, Tab, Enter e Espaço. |
-| 18 | Fallback | Cena final e footer completos; CTA permanece desabilitado até existir contato validado. | Abrir `#contato`; conferir a mensagem de pendência e ausência de link quebrado. |
+| 18 | Completo | Formulário prepara a mensagem no navegador, abre o WhatsApp profissional e mantém a cena final com CTA direto. | Abrir `#contato`; preencher os campos, revisar a mensagem no WhatsApp e testar o CTA final. |
 | 19 | Completo | Header reativo, menu móvel, sublinhados, foco, botões magnéticos, reveals e efeito social preparado. | Rolar o header, abrir menu em 390 px e testar CTAs com ponteiro fino e teclado. |
 | 20 | Completo | Oito larguras verificadas, reduced-motion, ausência de overflow, build, lint, typecheck e Playwright. | Executar os scripts da seção “Resultados reais” e abrir `docs/screenshots/qa-results.json`. |
 
@@ -111,7 +111,7 @@ As evidências ficam em `docs/screenshots/qa-results.json` e nas capturas PNG da
 - CRP e forma de exibição.
 - Formação, experiência, atuação no CAPS, facilitação de grupos e situação da Logoterapia.
 - Modalidades atuais, fluxo real de contato e disponibilidade.
-- WhatsApp, e-mail ou agenda profissional.
+- Confirmar periodicamente se o WhatsApp profissional publicado continua ativo.
 - Perfis profissionais de redes sociais.
 - Arquivo ou URL do guia gratuito.
 - Seleção final de fotos, autorização de uso, crops e copy.

@@ -14,7 +14,9 @@ export function CinemaHud() {
         </span>
         <span className="cinema-hud__chapter">
           <span data-cinema-current>01</span>
-          <span>/10</span>
+          <span>
+            /<span data-cinema-total>10</span>
+          </span>
         </span>
       </aside>
     </>

@@ -290,36 +290,22 @@ export function MotionOrchestrator({ children }: { children: ReactNode }) {
         const progressCurrent = scope.querySelector<HTMLElement>(
           "[data-cinema-current]",
         );
+        const progressTotal = scope.querySelector<HTMLElement>(
+          "[data-cinema-total]",
+        );
         const progressValue = scope.querySelector<HTMLElement>(
           "[data-cinema-progress-value]",
         );
-
-        if (progressFill) {
-          gsap.fromTo(
-            progressFill,
-            { scaleY: 0 },
-            {
-              scaleY: 1,
-              ease: "none",
-              scrollTrigger: {
-                trigger: scope,
-                start: "top top",
-                end: "bottom bottom",
-                scrub: 0.25,
-                onUpdate: (self) => {
-                  if (progressValue) {
-                    progressValue.textContent = `${Math.round(self.progress * 100)}%`;
-                  }
-                },
-              },
-            },
-          );
-        }
 
         const chapters = gsap.utils.toArray<HTMLElement>(
           "[data-chapter-label]",
           scope,
         );
+
+        if (progressTotal) {
+          progressTotal.textContent = String(chapters.length).padStart(2, "0");
+        }
+
         const updateChapter = () => {
           const marker = window.innerHeight * 0.52;
           const active = chapters.reduce((current, chapter) => {
@@ -337,10 +323,33 @@ export function MotionOrchestrator({ children }: { children: ReactNode }) {
           }
         };
 
+        if (progressFill) {
+          gsap.set(progressFill, { scaleY: 0, transformOrigin: "top" });
+          ScrollTrigger.create({
+            start: 0,
+            end: () => ScrollTrigger.maxScroll(window),
+            invalidateOnRefresh: true,
+            refreshPriority: -100,
+            onUpdate: (self) => {
+              gsap.set(progressFill, { scaleY: self.progress });
+              if (progressValue) {
+                progressValue.textContent = `${Math.round(self.progress * 100)}%`;
+              }
+            },
+            onRefresh: (self) => {
+              gsap.set(progressFill, { scaleY: self.progress });
+              if (progressValue) {
+                progressValue.textContent = `${Math.round(self.progress * 100)}%`;
+              }
+            },
+          });
+        }
+
         ScrollTrigger.create({
-          trigger: scope,
-          start: "top top",
-          end: "bottom bottom",
+          start: 0,
+          end: () => ScrollTrigger.maxScroll(window),
+          invalidateOnRefresh: true,
+          refreshPriority: -100,
           onUpdate: updateChapter,
           onRefresh: updateChapter,
         });

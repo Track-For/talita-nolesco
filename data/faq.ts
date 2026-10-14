@@ -7,17 +7,17 @@ export const faq = [
   {
     question: "Qual é a diferença entre o atendimento individual e em grupo?",
     answer:
-      "No individual, o encontro é dedicado à experiência de uma pessoa. No grupo, há uma proposta coletiva mediada pela psicóloga. Temas, composição e disponibilidade dos grupos ainda precisam de confirmação",
+      "No individual, o encontro é dedicado à experiência de uma pessoa. No grupo, a proposta é coletiva e mediada pela psicóloga. Temas, composição e abertura de novas turmas são informados no contato profissional",
   },
   {
     question: "Como posso pedir informações?",
     answer:
-      "O canal profissional de contato ainda será validado para esta versão. Assim que aprovado, o botão de contato levará diretamente ao meio indicado pela Talita",
+      "Você pode preencher o formulário do site ou usar o botão de contato. Nos dois casos, o WhatsApp de Talita será aberto para você revisar e enviar a mensagem",
   },
   {
     question: "Como são tratados meus dados neste site?",
     answer:
-      "Este protótipo não possui formulário, cookies de análise ou ferramentas de publicidade. Quando um canal externo for adicionado, a política deverá explicar quais dados são tratados e por quem",
+      "O formulário não envia nem armazena seus dados neste site. Ao continuar, as informações preenchidas são transferidas para uma conversa no WhatsApp, onde você pode revisar a mensagem antes de enviá-la",
   },
 ] as const;
 

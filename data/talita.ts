@@ -11,41 +11,44 @@ export const talita = {
     note: "Dado exibido no site anterior. Confirmar antes da publicação.",
   },
   hero: {
-    title: "Um espaço para olhar para si com mais acolhimento.",
+    title: "Psicoterapia online para mulheres.",
     description:
-      "Psicoterapia online para mulheres que desejam compreender suas emoções, suas relações e sua própria histórias",
+      "Um espaço de escuta para compreender emoções, relações e escolhas com mais clareza e acolhimento.",
     status: "provisorio" as ContentStatus,
   },
   about: {
-    title: "Escuta profissional para histórias singulares.",
+    title: "Uma trajetória dedicada à escuta e ao cuidado.",
     paragraphs: [
-      "Talita conduz um espaço de conversa atento à história, aos vínculos e às perguntas que cada mulher traz. A proposta é acolher o que está sendo vivido sem reduzir a pessoa a um rótulo",
-      "Sua trajetória reúne atendimentos psicoterapêuticos, experiência no CAPS e facilitação de grupos. As informações de formação abaixo vieram do site anterior e precisam ser validadas pela profissional",
+      "Formada em Psicologia pela Universidade Católica de Santos, Talita construiu sua trajetória profissional em diferentes espaços de cuidado, incluindo a atuação no CAPS e a facilitação de grupos.",
+      "Seus estudos em Logoterapia e Análise Existencial ampliam uma prática atenta à história, aos vínculos, às escolhas e aos sentidos que cada pessoa constrói ao longo da vida.",
     ],
     status: "provisorio" as ContentStatus,
   },
   formation: [
     {
-      title: "Graduação em Psicologia",
+      title: "Formação em Psicologia",
       detail: "Universidade Católica de Santos",
       status: "pendente" as ContentStatus,
     },
     {
-      title: "Psicologia do Trabalho",
-      detail: "Pós-graduação mencionada no site anterior",
+      title: "Experiência em saúde mental",
+      detail: "Atuação no CAPS e facilitação de grupos",
       status: "pendente" as ContentStatus,
     },
     {
-      title: "Logoterapia",
-      detail: "Formação em curso, sem apresentação como título concluído",
+      title: "Estudos em Logoterapia",
+      detail: "Formação continuada em Logoterapia e Análise Existencial",
       status: "pendente" as ContentStatus,
     },
   ],
   contact: {
-    href: null as string | null,
-    label: "Conversar sobre o atendimento",
-    status: "pendente" as ContentStatus,
-    note: "Canal profissional a confirmar com Talita.",
+    href:
+      "https://wa.me/5513991054065?text=Ol%C3%A1%2C%20Talita.%20Gostaria%20de%20receber%20informa%C3%A7%C3%B5es%20sobre%20o%20atendimento." as string | null,
+    label: "Solicitar informações sobre o atendimento",
+    displayPhone: "+55 13 99105-4065",
+    whatsappNumber: "5513991054065",
+    status: "confirmado" as ContentStatus,
+    note: "Contato profissional pelo WhatsApp.",
   },
   guide: {
     title: "Guia gratuito",
@@ -96,7 +99,7 @@ export const journey = [
   {
     title: "Solicitar informações",
     description:
-      "Entre em contato pelo canal profissional que será confirmado por Talita antes da publicação",
+      "Use o canal profissional indicado no site para consultar disponibilidade e tirar dúvidas sobre o atendimento",
   },
   {
     title: "Alinhar os detalhes",
@@ -106,7 +109,7 @@ export const journey = [
   {
     title: "Iniciar o acompanhamento",
     description:
-      "O início acontece depois desse alinhamento e conforme a disponibilidade real da profissional e da pessoa interessada",
+      "Depois do alinhamento inicial, o acompanhamento pode começar conforme a disponibilidade da profissional e da pessoa interessada",
   },
 ] as const;
 

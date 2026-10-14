@@ -15,20 +15,25 @@ export default function PrivacyPage() {
         <p className="section-kicker">Privacidade</p>
         <h1>Como este protótipo trata dados.</h1>
         <p>
-          Esta versão conceitual não possui formulário, área de login, cookies
-          de análise, pixel de publicidade ou ferramenta de acompanhamento de
-          comportamento.
+          Esta versão conceitual não possui área de login, cookies de análise,
+          pixel de publicidade ou ferramenta de acompanhamento de comportamento.
         </p>
         <h2>Contato profissional</h2>
         <p>
-          O canal de contato ainda não foi definido. Quando for adicionado, esta
-          política deverá informar se o serviço é operado por terceiro, quais
-          dados podem ser processados e para qual finalidade.
+          O formulário de contato funciona apenas no seu navegador. As informações
+          preenchidas não são enviadas nem armazenadas pelo site. Ao continuar,
+          elas são inseridas em uma mensagem no WhatsApp para revisão e envio pela
+          própria pessoa.
+        </p>
+        <p>
+          O tratamento de dados realizado depois da abertura do WhatsApp está
+          sujeito aos termos e às práticas de privacidade desse serviço e ao
+          atendimento profissional de Talita.
         </p>
         <h2>Publicação</h2>
         <p>
-          Antes da publicação, Talita deve revisar este texto e definir um canal
-          para solicitações relacionadas a dados pessoais. Também será
+          Antes da publicação, Talita deve revisar este texto e definir como serão
+          recebidas solicitações relacionadas a dados pessoais. Também será
           necessário registrar a data da última atualização.
         </p>
         <p className="validation-note">

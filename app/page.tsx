@@ -10,6 +10,7 @@ import { MagneticLink } from "@/components/motion/MagneticLink";
 import { MotionOrchestrator } from "@/components/motion/MotionOrchestrator";
 import { OrganicThread } from "@/components/motion/OrganicThread";
 import { CinematicBridge } from "@/components/sections/CinematicBridge";
+import { WhatsAppContactForm } from "@/components/sections/WhatsAppContactForm";
 import { DirectionalHeading } from "@/components/ui/DirectionalHeading";
 import { OrganicFieldScene } from "@/components/webgl/OrganicFieldScene";
 import { faq } from "@/data/faq";
@@ -19,7 +20,7 @@ import talitaCadeira from "@/public/images/optimized/talita-na-cadeira.webp";
 import talitaSorrindo from "@/public/images/optimized/talita-sorrindo.webp";
 
 function HeroTitle() {
-  const lines = ["Um espaço para olhar", "para si com mais acolhimento"];
+  const lines = ["Psicoterapia online", "para mulheres"];
 
   return (
     <h1>
@@ -57,7 +58,7 @@ export default function Home() {
           </p>
           <div className="hero__copy">
             <p className="eyebrow" data-hero-meta>
-              Psicoterapia online para mulheres
+              Talita F. Nolasco · Psicóloga
             </p>
             <HeroTitle />
             <p className="hero__description" data-hero-meta>
@@ -138,14 +139,11 @@ export default function Home() {
               <div className="about-intro" data-reveal>
                 <p className="section-kicker">Sobre Talita</p>
                 <DirectionalHeading
-                  lines={["Escuta profissional para", "histórias singulares"]}
+                  lines={["Uma trajetória dedicada", "à escuta e ao cuidado"]}
                 />
                 {talita.about.paragraphs.map((paragraph) => (
                   <p key={paragraph}>{paragraph}</p>
                 ))}
-                <p className="validation-note">
-                  Informações profissionais em validação para a apresentação.
-                </p>
               </div>
 
               <figure
@@ -173,7 +171,6 @@ export default function Home() {
                   <article key={item.title}>
                     <h3>{item.title}</h3>
                     <p>{item.detail}</p>
-                    <span>Validar antes de publicar</span>
                   </article>
                 ))}
               </div>
@@ -212,11 +209,11 @@ export default function Home() {
             <div className="section-frame services-layout">
               <div className="services-intro" data-reveal>
                 <DirectionalHeading
-                  lines={["Atendimentos apresentados", "neste protótipo"]}
+                  lines={["Modalidades de", "atendimento online"]}
                 />
                 <p>
-                  Duas modalidades citadas na bio recente. Valores, duração,
-                  frequência, disponibilidade e plataforma não são presumidos
+                  Conheça as características de cada modalidade e encontre um
+                  primeiro caminho para solicitar informações
                 </p>
               </div>
 
@@ -231,10 +228,18 @@ export default function Home() {
                       {String(index + 1).padStart(2, "0")}
                     </div>
                     <div>
+                      <p className="service-panel__modality">
+                        {service.modality}
+                      </p>
                       <h3>{service.title}</h3>
                       <p className="service-panel__summary">{service.summary}</p>
                       <p>{service.detail}</p>
-                      <a href="#primeiro-contato">Entenda o primeiro contato</a>
+                      <ul className="service-panel__features">
+                        {service.features.map((feature) => (
+                          <li key={feature}>{feature}</li>
+                        ))}
+                      </ul>
+                      <a href="#contato">Solicitar informações</a>
                     </div>
                     <span className="service-panel__shape" aria-hidden="true" />
                   </article>
@@ -273,8 +278,8 @@ export default function Home() {
               <div className="journey-intro" data-reveal>
                 <h2>Como funciona o primeiro contato?</h2>
                 <p>
-                  Uma proposta de fluxo para reduzir dúvidas, sujeita à
-                  confirmação do processo real de Talita
+                  Do interesse inicial ao começo do acompanhamento, cada etapa
+                  ajuda a tornar o processo mais claro
                 </p>
               </div>
               <div className="journey-cards">
@@ -303,8 +308,8 @@ export default function Home() {
               <div className="faq-intro" data-reveal>
                 <h2>Dúvidas antes de entrar em contato</h2>
                 <p>
-                  Respostas provisórias, sem inventar condições operacionais que
-                  ainda precisam ser confirmadas
+                  Informações iniciais para compreender as modalidades e dar o
+                  próximo passo com mais segurança
                 </p>
               </div>
               <div className="faq-list" data-reveal>
@@ -324,12 +329,30 @@ export default function Home() {
           </section>
 
           <section
-            className="contact-section"
+            className="contact-form-section"
             data-chapter-index="10"
             data-chapter-label="Contato"
-            data-header-tone="dark"
+            data-header-tone="light"
             id="contato"
           >
+            <div className="section-frame contact-form-layout">
+              <div className="contact-form-intro" data-reveal>
+                <h2>Conte um pouco do que você procura</h2>
+                <p>
+                  Preencha os campos para preparar sua mensagem. Você poderá
+                  revisar tudo no WhatsApp antes de enviar.
+                </p>
+              </div>
+              <div data-reveal>
+                <WhatsAppContactForm
+                  displayPhone={talita.contact.displayPhone}
+                  whatsappNumber={talita.contact.whatsappNumber}
+                />
+              </div>
+            </div>
+          </section>
+
+          <section className="contact-section" data-header-tone="dark">
             <div
               className="contact-section__image"
               data-image-reveal="from-right"
@@ -355,17 +378,18 @@ export default function Home() {
               <DirectionalHeading
                 lines={["Sua história merece", "um espaço de escuta"]}
               />
+              <p className="contact-section__lead">
+                Conheça as modalidades de psicoterapia online e converse sobre
+                a possibilidade de iniciar seu acompanhamento.
+              </p>
               {talita.contact.href ? (
                 <MagneticLink href={talita.contact.href} variant="light">
                   {talita.contact.label}
                 </MagneticLink>
               ) : (
-                <>
-                  <span aria-disabled="true" className="button button--disabled">
-                    <span>{talita.contact.label}</span>
-                  </span>
-                  <p className="contact-pending">{talita.contact.note}</p>
-                </>
+                <span aria-disabled="true" className="button button--disabled">
+                  <span>{talita.contact.label}</span>
+                </span>
               )}
             </div>
           </section>

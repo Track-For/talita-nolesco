@@ -217,7 +217,7 @@
     "cinemaState": {
       "chapter": "03",
       "clipPath": "none",
-      "transform": "matrix(0.720442, -0.00911293, 0.00911293, 0.720442, 0, 11.4611)"
+      "transform": "matrix(0.720042, -0.00911918, 0.00911918, 0.720042, 0, 11.4744)"
     },
     "approachState": {
       "panelTransforms": [

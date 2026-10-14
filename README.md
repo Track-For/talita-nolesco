@@ -48,11 +48,11 @@ As capturas e métricas são gravadas em `docs/screenshots/`.
 
 Os registros distinguem conteúdo confirmado, provisório e pendente. Não remova esses estados sem validar as informações com Talita.
 
-## Ativar o contato profissional
+## Contato profissional
 
-Em `data/talita.ts`, substitua o `href` pendente por um link profissional validado. Exemplos de formato técnico aceito incluem `mailto:` ou uma URL HTTPS de agenda/WhatsApp, mas o projeto não fornece nem inventa o número.
+O WhatsApp profissional está centralizado em `data/talita.ts`. O CTA final usa o link direto e o formulário prepara uma mensagem no navegador antes de abrir o WhatsApp.
 
-Quando o link estiver presente, o CTA final muda automaticamente do estado desabilitado para um link real. Revise também o texto e o aviso associados.
+O formulário não envia nem armazena dados no site. Se o número mudar, atualize `href`, `displayPhone` e `whatsappNumber` no mesmo arquivo.
 
 ## Ativar redes sociais
 

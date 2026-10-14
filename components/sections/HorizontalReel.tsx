@@ -19,10 +19,6 @@ const scenes = [
     title: "O que importa",
     text: "pode aparecer com mais nitidez",
   },
-  {
-    title: "O que ainda não tem nome",
-    text: "também pode encontrar espaço",
-  },
 ] as const;
 
 export function HorizontalReel() {
@@ -73,7 +69,7 @@ export function HorizontalReel() {
                   scrollTrigger: {
                     trigger: section,
                     start: "top top",
-                    end: () => `+=${distance() * 0.34}`,
+                    end: () => `+=${distance() * 0.52}`,
                     scrub: 0.65,
                     invalidateOnRefresh: true,
                   },
@@ -89,7 +85,7 @@ export function HorizontalReel() {
                     scrollTrigger: {
                       trigger: section,
                       start: "top top",
-                      end: () => `+=${distance() * 0.34}`,
+                      end: () => `+=${distance() * 0.52}`,
                       scrub: 0.65,
                       invalidateOnRefresh: true,
                     },

@@ -23,6 +23,9 @@ export function Footer() {
             <br />
             CRP {talita.crp.value} (a confirmar)
           </p>
+          <a className="site-footer__contact" href={talita.contact.href ?? "#contato"}>
+            {talita.contact.displayPhone}
+          </a>
           <SocialHighlightCards links={socialLinks} />
         </div>
         <nav aria-label="Navegação do rodapé">
