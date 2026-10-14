@@ -12,6 +12,8 @@ const eslintConfig = defineConfig([
     "out/**",
     "build/**",
     "next-env.d.ts",
+    // Vendored standalone library with its own package and lint context.
+    "trackfor-motion-library/**",
   ]),
 ]);
 

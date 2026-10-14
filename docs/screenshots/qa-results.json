@@ -1,0 +1,236 @@
+[
+  {
+    "viewport": "1920x1080",
+    "status": 200,
+    "consoleErrors": [],
+    "pageErrors": [],
+    "metrics": {
+      "h1Count": 1,
+      "viewportWidth": 1920,
+      "scrollWidth": 1920,
+      "bodyScrollWidth": 1920,
+      "missingAnchors": [],
+      "imageCount": 9,
+      "lazyImagesPendingAtInitial": [
+        "/_next/image?url=%2Fimages%2FLogo.png&w=3840&q=75",
+        "/_next/static/media/talita-pensante.1nccdflfsl0rc.webp",
+        "/_next/static/media/talita-na-cadeira.2st_zc4m62ws_.webp",
+        "/_next/static/media/talita-pensante.1nccdflfsl0rc.webp",
+        "/_next/static/media/talita-pensante.1nccdflfsl0rc.webp",
+        "/_next/static/media/talita-sorrindo.08fi0o4cvbygg.webp",
+        "/_next/image?url=%2Fimages%2FLogo.png&w=3840&q=75"
+      ],
+      "reducedMotion": true,
+      "incompleteImagesAfterTraversal": [
+        "/_next/image?url=%2Fimages%2FLogo.png&w=3840&q=75"
+      ]
+    }
+  },
+  {
+    "viewport": "1440x900",
+    "status": 200,
+    "consoleErrors": [],
+    "pageErrors": [],
+    "metrics": {
+      "h1Count": 1,
+      "viewportWidth": 1440,
+      "scrollWidth": 1440,
+      "bodyScrollWidth": 1440,
+      "missingAnchors": [],
+      "imageCount": 9,
+      "lazyImagesPendingAtInitial": [
+        "/_next/image?url=%2Fimages%2FLogo.png&w=3840&q=75",
+        "/_next/static/media/talita-na-cadeira.2st_zc4m62ws_.webp",
+        "/_next/static/media/talita-pensante.1nccdflfsl0rc.webp",
+        "/_next/static/media/talita-pensante.1nccdflfsl0rc.webp",
+        "/_next/static/media/talita-sorrindo.08fi0o4cvbygg.webp",
+        "/_next/image?url=%2Fimages%2FLogo.png&w=3840&q=75"
+      ],
+      "reducedMotion": true,
+      "incompleteImagesAfterTraversal": [
+        "/_next/image?url=%2Fimages%2FLogo.png&w=3840&q=75"
+      ]
+    }
+  },
+  {
+    "viewport": "1024x768",
+    "status": 200,
+    "consoleErrors": [],
+    "pageErrors": [],
+    "metrics": {
+      "h1Count": 1,
+      "viewportWidth": 1024,
+      "scrollWidth": 1024,
+      "bodyScrollWidth": 1024,
+      "missingAnchors": [],
+      "imageCount": 9,
+      "lazyImagesPendingAtInitial": [
+        "/_next/image?url=%2Fimages%2FLogo.png&w=3840&q=75",
+        "/_next/static/media/talita-na-cadeira.2st_zc4m62ws_.webp",
+        "/_next/static/media/talita-pensante.1nccdflfsl0rc.webp",
+        "/_next/static/media/talita-pensante.1nccdflfsl0rc.webp",
+        "/_next/static/media/talita-sorrindo.08fi0o4cvbygg.webp",
+        "/_next/image?url=%2Fimages%2FLogo.png&w=3840&q=75"
+      ],
+      "reducedMotion": true,
+      "incompleteImagesAfterTraversal": [
+        "/_next/image?url=%2Fimages%2FLogo.png&w=3840&q=75"
+      ]
+    }
+  },
+  {
+    "viewport": "768x1024",
+    "status": 200,
+    "consoleErrors": [],
+    "pageErrors": [],
+    "metrics": {
+      "h1Count": 1,
+      "viewportWidth": 768,
+      "scrollWidth": 768,
+      "bodyScrollWidth": 768,
+      "missingAnchors": [],
+      "imageCount": 9,
+      "lazyImagesPendingAtInitial": [
+        "/_next/image?url=%2Fimages%2FLogo.png&w=3840&q=75",
+        "/_next/static/media/talita-pensante.1nccdflfsl0rc.webp",
+        "/_next/static/media/talita-na-cadeira.2st_zc4m62ws_.webp",
+        "/_next/static/media/talita-pensante.1nccdflfsl0rc.webp",
+        "/_next/static/media/talita-pensante.1nccdflfsl0rc.webp",
+        "/_next/static/media/talita-sorrindo.08fi0o4cvbygg.webp",
+        "/_next/image?url=%2Fimages%2FLogo.png&w=3840&q=75"
+      ],
+      "reducedMotion": true,
+      "incompleteImagesAfterTraversal": [
+        "/_next/image?url=%2Fimages%2FLogo.png&w=3840&q=75"
+      ]
+    }
+  },
+  {
+    "viewport": "430x932",
+    "status": 200,
+    "consoleErrors": [],
+    "pageErrors": [],
+    "metrics": {
+      "h1Count": 1,
+      "viewportWidth": 430,
+      "scrollWidth": 430,
+      "bodyScrollWidth": 430,
+      "missingAnchors": [],
+      "imageCount": 9,
+      "lazyImagesPendingAtInitial": [
+        "/_next/image?url=%2Fimages%2FLogo.png&w=3840&q=75",
+        "/_next/static/media/talita-pensante.1nccdflfsl0rc.webp",
+        "/_next/static/media/talita-na-cadeira.2st_zc4m62ws_.webp",
+        "/_next/static/media/talita-pensante.1nccdflfsl0rc.webp",
+        "/_next/static/media/talita-pensante.1nccdflfsl0rc.webp",
+        "/_next/static/media/talita-sorrindo.08fi0o4cvbygg.webp",
+        "/_next/image?url=%2Fimages%2FLogo.png&w=3840&q=75"
+      ],
+      "reducedMotion": true,
+      "incompleteImagesAfterTraversal": [
+        "/_next/image?url=%2Fimages%2FLogo.png&w=3840&q=75"
+      ]
+    }
+  },
+  {
+    "viewport": "390x844",
+    "status": 200,
+    "consoleErrors": [],
+    "pageErrors": [],
+    "metrics": {
+      "h1Count": 1,
+      "viewportWidth": 390,
+      "scrollWidth": 390,
+      "bodyScrollWidth": 390,
+      "missingAnchors": [],
+      "imageCount": 9,
+      "lazyImagesPendingAtInitial": [
+        "/_next/image?url=%2Fimages%2FLogo.png&w=3840&q=75",
+        "/_next/static/media/talita-pensante.1nccdflfsl0rc.webp",
+        "/_next/static/media/talita-na-cadeira.2st_zc4m62ws_.webp",
+        "/_next/static/media/talita-pensante.1nccdflfsl0rc.webp",
+        "/_next/static/media/talita-pensante.1nccdflfsl0rc.webp",
+        "/_next/static/media/talita-sorrindo.08fi0o4cvbygg.webp",
+        "/_next/image?url=%2Fimages%2FLogo.png&w=3840&q=75"
+      ],
+      "reducedMotion": true,
+      "incompleteImagesAfterTraversal": []
+    }
+  },
+  {
+    "viewport": "360x800",
+    "status": 200,
+    "consoleErrors": [],
+    "pageErrors": [],
+    "metrics": {
+      "h1Count": 1,
+      "viewportWidth": 360,
+      "scrollWidth": 360,
+      "bodyScrollWidth": 360,
+      "missingAnchors": [],
+      "imageCount": 9,
+      "lazyImagesPendingAtInitial": [
+        "/_next/image?url=%2Fimages%2FLogo.png&w=3840&q=75",
+        "/_next/static/media/talita-pensante.1nccdflfsl0rc.webp",
+        "/_next/static/media/talita-na-cadeira.2st_zc4m62ws_.webp",
+        "/_next/static/media/talita-pensante.1nccdflfsl0rc.webp",
+        "/_next/static/media/talita-pensante.1nccdflfsl0rc.webp",
+        "/_next/static/media/talita-sorrindo.08fi0o4cvbygg.webp",
+        "/_next/image?url=%2Fimages%2FLogo.png&w=3840&q=75"
+      ],
+      "reducedMotion": true,
+      "incompleteImagesAfterTraversal": [
+        "/_next/image?url=%2Fimages%2FLogo.png&w=3840&q=75"
+      ]
+    }
+  },
+  {
+    "viewport": "320x700",
+    "status": 200,
+    "consoleErrors": [],
+    "pageErrors": [],
+    "metrics": {
+      "h1Count": 1,
+      "viewportWidth": 320,
+      "scrollWidth": 320,
+      "bodyScrollWidth": 320,
+      "missingAnchors": [],
+      "imageCount": 9,
+      "lazyImagesPendingAtInitial": [
+        "/_next/image?url=%2Fimages%2FLogo.png&w=3840&q=75",
+        "/_next/static/media/talita-pensante.1nccdflfsl0rc.webp",
+        "/_next/static/media/talita-na-cadeira.2st_zc4m62ws_.webp",
+        "/_next/static/media/talita-pensante.1nccdflfsl0rc.webp",
+        "/_next/static/media/talita-pensante.1nccdflfsl0rc.webp",
+        "/_next/static/media/talita-sorrindo.08fi0o4cvbygg.webp",
+        "/_next/image?url=%2Fimages%2FLogo.png&w=3840&q=75"
+      ],
+      "reducedMotion": true,
+      "incompleteImagesAfterTraversal": [
+        "/_next/image?url=%2Fimages%2FLogo.png&w=3840&q=75"
+      ]
+    }
+  },
+  {
+    "viewport": "1440x900-motion",
+    "motionErrors": [],
+    "cinemaState": {
+      "chapter": "03",
+      "clipPath": "none",
+      "transform": "matrix(0.720142, -0.00911668, 0.00911668, 0.720142, 0, 11.47)"
+    },
+    "approachState": {
+      "panelTransforms": [
+        "matrix(1, 0, 0, 1, 0, 0)",
+        "matrix(1, 0, 0, 0.9329, 0, 0)",
+        "matrix(1, 0, 0, 0.8631, 0, 0)",
+        "matrix(1, 0, 0, 0.7904, 0, 0)",
+        "matrix(1, 0, 0, 0.715, 0, 0)"
+      ],
+      "polygonPoints": "50.00,8.00 58.3201,14.0499 66.6402,20.0897 74.9703,26.1396 83.29,32.1799 89.3099,38.9801 86.1304,48.7601 82.9503,58.5401 79.7703,68.3301 76.5902,78.1101 70.5699,83.98 60.29,83.9803 50.00,83.9806 39.71,83.9803 29.4301,83.98 23.4098,78.1101 20.2297,68.3301 17.0497,58.5401 13.8696,48.7601 10.6901,38.9801 16.71,32.1799 25.0297,26.1396 33.3598,20.0897 41.6799,14.0499"
+    },
+    "reelEnhanced": "true",
+    "reelToneAt70Percent": "lavender",
+    "webglEnhanced": "true"
+  }
+]
