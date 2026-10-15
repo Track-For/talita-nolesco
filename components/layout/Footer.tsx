@@ -14,18 +14,24 @@ export function Footer() {
             alt={talita.name}
             className="footer-logo"
             height={289}
+            loading="eager"
             sizes="(max-width: 700px) 210px, 250px"
             src="/images/Logo.png"
+            unoptimized
             width={864}
           />
           <p>
-            Psicóloga, atendimento online
-            <br />
-            CRP {talita.crp.value} (a confirmar)
+            Psicóloga · CRP {talita.crp.value}
+            <br />Atendimento online
           </p>
-          <a className="site-footer__contact" href={talita.contact.href ?? "#contato"}>
-            {talita.contact.displayPhone}
-          </a>
+          <div className="site-footer__contacts">
+            <a className="site-footer__contact" href={talita.contact.href ?? "#contato"}>
+              {talita.contact.displayPhone}
+            </a>
+            <a className="site-footer__contact" href={`mailto:${talita.contact.email}`}>
+              {talita.contact.email}
+            </a>
+          </div>
           <SocialHighlightCards links={socialLinks} />
         </div>
         <nav aria-label="Navegação do rodapé">
@@ -37,15 +43,12 @@ export function Footer() {
         </nav>
         <div className="site-footer__legal">
           <Link href="/privacidade">Privacidade</Link>
-          <p>
-            Protótipo conceitual. Conteúdo profissional sujeito à revisão e
-            aprovação de Talita F. Nolasco.
-          </p>
+          <p>Atendimento psicológico online com horário previamente agendado.</p>
         </div>
       </div>
       <div className="site-footer__base">
         <span>Entre sentir e florescer</span>
-        <span>Sem rastreamento nesta versão</span>
+        <span>Talita F. Nolasco</span>
       </div>
     </footer>
   );

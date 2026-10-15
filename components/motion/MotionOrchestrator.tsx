@@ -127,20 +127,70 @@ export function MotionOrchestrator({ children }: { children: ReactNode }) {
         gsap.utils.toArray<HTMLElement>("[data-reveal]", scope).forEach((el) => {
           gsap.fromTo(
             el,
-            { y: 42, autoAlpha: 0 },
+            { y: 42 },
             {
               y: 0,
-              autoAlpha: 1,
               duration: 0.9,
               ease: motionTokens.ease,
+              force3D: true,
+              overwrite: "auto",
+              onComplete: () => gsap.set(el, { clearProps: "transform" }),
               scrollTrigger: {
                 trigger: el,
                 start: "top 87%",
+                invalidateOnRefresh: true,
                 once: true,
+                onEnter: () => gsap.set(el, { willChange: "transform" }),
+                onLeave: () => gsap.set(el, { willChange: "auto" }),
               },
             },
           );
         });
+
+        gsap.utils
+          .toArray<HTMLElement>("[data-highlighted-text]", scope)
+          .forEach((highlight) => {
+            const wash = highlight.querySelector<HTMLElement>(
+              "[data-highlighted-text-wash]",
+            );
+            if (!wash) return;
+
+            const direction = highlight.dataset.highlightFrom ?? "bottom";
+            const horizontal = direction === "left" || direction === "right";
+            const origin =
+              direction === "left"
+                ? "left center"
+                : direction === "right"
+                  ? "right center"
+                  : direction === "top"
+                    ? "center top"
+                    : "center bottom";
+
+            gsap.fromTo(
+              wash,
+              {
+                scaleX: horizontal ? 0 : 1,
+                scaleY: horizontal ? 1 : 0,
+                transformOrigin: origin,
+              },
+              {
+                scaleX: 1,
+                scaleY: 1,
+                duration: 0.78,
+                delay: Number(highlight.dataset.highlightDelay ?? 0),
+                ease: "power3.out",
+                force3D: true,
+                scrollTrigger: {
+                  trigger: highlight,
+                  start: "top 88%",
+                  once: true,
+                  invalidateOnRefresh: true,
+                  onEnter: () => gsap.set(wash, { willChange: "transform" }),
+                  onLeave: () => gsap.set(wash, { willChange: "auto" }),
+                },
+              },
+            );
+          });
 
         gsap.utils
           .toArray<HTMLElement>("[data-direction-line]", scope)
@@ -231,22 +281,64 @@ export function MotionOrchestrator({ children }: { children: ReactNode }) {
             wordsClass: "manifesto-word",
           });
 
-          gsap.fromTo(
-            manifestoSplit.words,
-            { opacity: 0.16, y: 18 },
-            {
-              opacity: 1,
-              y: 0,
-              stagger: 0.045,
-              ease: "none",
+          media.add("(max-width: 900px)", () => {
+            const manifestoSection = manifesto.closest<HTMLElement>(
+              "[data-manifesto-section]",
+            );
+            if (!manifestoSection || !manifestoSplit) return;
+
+            const mobileManifestoTimeline = gsap.timeline({
               scrollTrigger: {
-                trigger: manifesto,
-                start: "top 72%",
-                end: "bottom 62%",
-                scrub: 0.75,
+                trigger: manifestoSection,
+                start: "top 96%",
+                end: "top 22%",
+                scrub: 0.65,
+                invalidateOnRefresh: true,
+                onEnter: () =>
+                  gsap.set(manifestoSection, {
+                    willChange: "transform, clip-path",
+                  }),
+                onLeave: () =>
+                  gsap.set(manifestoSection, { willChange: "auto" }),
+                onEnterBack: () =>
+                  gsap.set(manifestoSection, {
+                    willChange: "transform, clip-path",
+                  }),
+                onLeaveBack: () =>
+                  gsap.set(manifestoSection, { willChange: "auto" }),
               },
-            },
-          );
+            });
+
+            mobileManifestoTimeline
+              .fromTo(
+                manifestoSection,
+                {
+                  yPercent: 12,
+                  clipPath: "inset(100% 0 0 0 round 2rem 2rem 0 0)",
+                },
+                {
+                  yPercent: 0,
+                  clipPath: "inset(0% 0 0 0 round 0rem)",
+                  duration: 1,
+                  ease: "power2.inOut",
+                  force3D: true,
+                },
+              )
+              .fromTo(
+                manifestoSplit.words,
+                { opacity: 0.16, y: 18 },
+                {
+                  opacity: 1,
+                  y: 0,
+                  duration: 0.64,
+                  stagger: 0.012,
+                  ease: "none",
+                },
+                0.24,
+              );
+
+            return () => mobileManifestoTimeline.kill();
+          });
         }
 
         const thread = scope.querySelector<SVGPathElement>("[data-thread-path]");
@@ -299,6 +391,10 @@ export function MotionOrchestrator({ children }: { children: ReactNode }) {
         const progressHud = scope.querySelector<HTMLElement>(".cinema-hud");
 
         const chapters = gsap.utils.toArray<HTMLElement>(
+          "[data-chapter-label]:not([data-chapter-proxy])",
+          scope,
+        );
+        const chapterRegions = gsap.utils.toArray<HTMLElement>(
           "[data-chapter-label]",
           scope,
         );
@@ -311,66 +407,67 @@ export function MotionOrchestrator({ children }: { children: ReactNode }) {
           progressTotal.textContent = String(chapters.length).padStart(2, "0");
         }
 
-        const updateChapter = () => {
-          const marker = window.innerHeight * 0.52;
-          const active = chapters.reduce((current, chapter) => {
-            return chapter.getBoundingClientRect().top <= marker
-              ? chapter
-              : current;
-          }, chapters[0]);
-
-          if (!active) return;
+        const activateChapter = (active: HTMLElement) => {
           if (progressLabel) {
             progressLabel.textContent = active.dataset.chapterLabel ?? "";
           }
           if (progressCurrent) {
             progressCurrent.textContent = active.dataset.chapterIndex ?? "";
           }
-
-          const activeToneSection = toneSections.reduce((current, section) => {
-            return section.getBoundingClientRect().top <= marker
-              ? section
-              : current;
-          }, toneSections[0]);
-
-          if (progressHud && activeToneSection) {
-            progressHud.dataset.tone =
-              activeToneSection.dataset.headerTone === "dark"
-                ? "dark"
-                : "light";
-          }
         };
+
+        const activateTone = (active: HTMLElement) => {
+          if (!progressHud) return;
+          progressHud.dataset.tone =
+            active.dataset.headerTone === "dark" ? "dark" : "light";
+        };
+
+        if (chapters[0]) activateChapter(chapters[0]);
+        chapterRegions.forEach((chapter) => {
+          ScrollTrigger.create({
+            trigger: chapter,
+            start: "top 52%",
+            end: "bottom 52%",
+            onToggle: (self) => {
+              if (self.isActive) activateChapter(chapter);
+            },
+          });
+        });
+
+        if (toneSections[0]) activateTone(toneSections[0]);
+        toneSections.forEach((section) => {
+          ScrollTrigger.create({
+            trigger: section,
+            start: "top 52%",
+            end: "bottom 52%",
+            onToggle: (self) => {
+              if (self.isActive) activateTone(section);
+            },
+          });
+        });
 
         if (progressFill) {
           gsap.set(progressFill, { scaleY: 0, transformOrigin: "top" });
+          const setProgress = gsap.quickSetter(progressFill, "scaleY");
+          let lastPercentage = -1;
+          const renderProgress = (progress: number) => {
+            setProgress(progress);
+            const percentage = Math.round(progress * 100);
+            if (progressValue && percentage !== lastPercentage) {
+              progressValue.textContent = `${percentage}%`;
+              lastPercentage = percentage;
+            }
+          };
+
           ScrollTrigger.create({
             start: 0,
             end: () => ScrollTrigger.maxScroll(window),
             invalidateOnRefresh: true,
             refreshPriority: -100,
-            onUpdate: (self) => {
-              gsap.set(progressFill, { scaleY: self.progress });
-              if (progressValue) {
-                progressValue.textContent = `${Math.round(self.progress * 100)}%`;
-              }
-            },
-            onRefresh: (self) => {
-              gsap.set(progressFill, { scaleY: self.progress });
-              if (progressValue) {
-                progressValue.textContent = `${Math.round(self.progress * 100)}%`;
-              }
-            },
+            onUpdate: (self) => renderProgress(self.progress),
+            onRefresh: (self) => renderProgress(self.progress),
           });
         }
-
-        ScrollTrigger.create({
-          start: 0,
-          end: () => ScrollTrigger.maxScroll(window),
-          invalidateOnRefresh: true,
-          refreshPriority: -100,
-          onUpdate: updateChapter,
-          onRefresh: updateChapter,
-        });
 
         media.add("(min-width: 901px)", () => {
           const hero = scope.querySelector<HTMLElement>(".hero");
@@ -414,6 +511,147 @@ export function MotionOrchestrator({ children }: { children: ReactNode }) {
             });
           }
 
+          const audienceSentirSequence = scope.querySelector<HTMLElement>(
+            "[data-audience-sentir-sequence]",
+          );
+          const audienceSection = audienceSentirSequence?.querySelector<HTMLElement>(
+            ".audience-section",
+          );
+          const manifestoSection = audienceSentirSequence?.querySelector<HTMLElement>(
+            "[data-manifesto-section]",
+          );
+          const manifestoImage = manifestoSection?.querySelector<HTMLElement>(
+            "[data-manifesto-image]",
+          );
+          const manifestoCopy = manifestoSection?.querySelector<HTMLElement>(
+            "[data-manifesto-copy]",
+          );
+          const siteHeader = scope.querySelector<HTMLElement>(".site-header");
+
+          if (
+            audienceSentirSequence &&
+            audienceSection &&
+            manifestoSection &&
+            manifestoImage &&
+            manifestoCopy
+          ) {
+            audienceSentirSequence.dataset.enhanced = "true";
+            gsap.set(manifestoSection, {
+              yPercent: 100,
+              borderTopLeftRadius: "3rem",
+              borderTopRightRadius: "3rem",
+            });
+            if (manifestoSplit) {
+              gsap.set(manifestoSplit.words, { opacity: 0.16, y: 18 });
+            }
+
+            let activeTransitionStage = "";
+            const syncTransitionStage = (progress: number) => {
+              const nextStage = progress < 0.1 ? "audience" : "manifesto";
+              if (nextStage === activeTransitionStage) return;
+              activeTransitionStage = nextStage;
+
+              if (nextStage === "audience") {
+                activateChapter(audienceSection);
+              } else {
+                activateChapter(manifestoSection);
+              }
+
+              const tone = nextStage === "manifesto" ? "dark" : "light";
+              if (siteHeader) siteHeader.dataset.tone = tone;
+              if (progressHud) progressHud.dataset.tone = tone;
+            };
+
+            const audienceSentirTimeline = gsap.timeline({
+              scrollTrigger: {
+                trigger: audienceSentirSequence,
+                start: "bottom bottom",
+                end: () => `+=${window.innerHeight * 1.45}`,
+                pin: true,
+                scrub: 0.5,
+                anticipatePin: 1,
+                refreshPriority: 2,
+                invalidateOnRefresh: true,
+                onEnter: () => {
+                  gsap.set([manifestoSection, manifestoImage], {
+                    willChange: "transform",
+                  });
+                },
+                onEnterBack: () => {
+                  gsap.set([manifestoSection, manifestoImage], {
+                    willChange: "transform",
+                  });
+                },
+                onLeave: () => {
+                  syncTransitionStage(1);
+                  gsap.set([manifestoSection, manifestoImage], {
+                    willChange: "auto",
+                  });
+                },
+                onLeaveBack: () => {
+                  syncTransitionStage(0);
+                  gsap.set([manifestoSection, manifestoImage], {
+                    willChange: "auto",
+                  });
+                },
+                onUpdate: (self) => syncTransitionStage(self.progress),
+              },
+            });
+
+            audienceSentirTimeline
+              .to(
+                manifestoSection,
+                {
+                  yPercent: 0,
+                  borderTopLeftRadius: "0rem",
+                  borderTopRightRadius: "0rem",
+                  duration: 1.05,
+                  ease: "power2.inOut",
+                  force3D: true,
+                },
+                0,
+              )
+              .fromTo(
+                manifestoImage,
+                { scale: 1.16, yPercent: 8 },
+                {
+                  scale: 1.03,
+                  yPercent: 0,
+                  duration: 1.05,
+                  ease: "none",
+                  force3D: true,
+                },
+                0,
+              )
+              .fromTo(
+                manifestoCopy,
+                { yPercent: 14, autoAlpha: 0.35 },
+                {
+                  yPercent: 0,
+                  autoAlpha: 1,
+                  duration: 0.72,
+                  ease: "power2.out",
+                  force3D: true,
+                },
+                0.2,
+              );
+
+            if (manifestoSplit) {
+              audienceSentirTimeline.to(
+                manifestoSplit.words,
+                {
+                  opacity: 1,
+                  y: 0,
+                  duration: 0.62,
+                  stagger: 0.012,
+                  ease: "none",
+                },
+                0.3,
+              );
+            }
+
+          }
+
           const bridge = scope.querySelector<HTMLElement>(
             "[data-cinema-bridge]",
           );
@@ -428,8 +666,8 @@ export function MotionOrchestrator({ children }: { children: ReactNode }) {
           const caption = bridge?.querySelector<HTMLElement>(
             "[data-cinema-caption]",
           );
-
           if (bridge && frame && image && backdrop && copy && caption) {
+            gsap.set(backdrop, { xPercent: 12, autoAlpha: 0 });
             const cinemaTimeline = gsap.timeline({
               scrollTrigger: {
                 trigger: bridge,
@@ -438,38 +676,39 @@ export function MotionOrchestrator({ children }: { children: ReactNode }) {
                 pin: true,
                 scrub: 1.2,
                 anticipatePin: 1,
-                refreshPriority: 2,
+                refreshPriority: 1,
                 invalidateOnRefresh: true,
               },
             });
 
             cinemaTimeline
-              .fromTo(
+              .to(
                 backdrop,
-                { xPercent: 12, autoAlpha: 0.16 },
-                { xPercent: -12, autoAlpha: 0.58, duration: 1, ease: "none" },
+                { xPercent: -12, autoAlpha: 0.5, duration: 1, ease: "none" },
                 0,
               )
               .fromTo(
                 frame,
                 {
-                  scale: 0.46,
-                  rotation: -1.4,
-                  yPercent: 3,
+                  scale: 0.9,
+                  rotation: -0.8,
+                  yPercent: 2,
+                  autoAlpha: 1,
                 },
                 {
                   scale: 1,
                   rotation: 0,
                   yPercent: 0,
-                  duration: 1.15,
-                  ease: "none",
+                  autoAlpha: 1,
+                  duration: 1.05,
+                  ease: "power2.out",
                 },
                 0,
               )
               .fromTo(
                 image,
-                { scale: 1.12 },
-                { scale: 1.01, duration: 1.15, ease: "none" },
+                { scale: 1.07 },
+                { scale: 1.01, duration: 1.05, ease: "none" },
                 0,
               );
 
@@ -483,13 +722,13 @@ export function MotionOrchestrator({ children }: { children: ReactNode }) {
                   duration: 0.48,
                   ease: "none",
                 },
-                0.3,
+                0.08,
               )
               .fromTo(
                 caption,
                 { y: 24, autoAlpha: 0 },
                 { y: 0, autoAlpha: 1, duration: 0.34, ease: "none" },
-                0.62,
+                0.22,
               );
           }
 
@@ -547,6 +786,7 @@ export function MotionOrchestrator({ children }: { children: ReactNode }) {
                 pin: true,
                 scrub: 1.1,
                 anticipatePin: 1,
+                refreshPriority: 3,
                 invalidateOnRefresh: true,
               },
             });
@@ -609,6 +849,17 @@ export function MotionOrchestrator({ children }: { children: ReactNode }) {
                 );
             });
           }
+
+          return () => {
+            if (audienceSentirSequence) {
+              delete audienceSentirSequence.dataset.enhanced;
+            }
+            if (manifestoSection && manifestoImage) {
+              gsap.set([manifestoSection, manifestoImage], {
+                clearProps: "transform,willChange,borderRadius",
+              });
+            }
+          };
         });
 
         media.add("(max-width: 900px)", () => {
@@ -676,7 +927,17 @@ export function MotionOrchestrator({ children }: { children: ReactNode }) {
           });
         });
 
+        let disposed = false;
+        const refreshFrame = window.requestAnimationFrame(() => {
+          if (!disposed) ScrollTrigger.refresh();
+        });
+        void document.fonts.ready.then(() => {
+          if (!disposed) ScrollTrigger.refresh();
+        });
+
         return () => {
+          disposed = true;
+          window.cancelAnimationFrame(refreshFrame);
           manifestoSplit?.revert();
         };
       });

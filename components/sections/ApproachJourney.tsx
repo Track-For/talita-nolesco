@@ -1,4 +1,5 @@
 import { approachConcepts } from "@/data/talita";
+import { HighlightedText } from "@/registry/spell-ui/highlighted-text";
 import type { CSSProperties } from "react";
 
 const SHAPE_SAMPLES = 24;
@@ -34,7 +35,7 @@ export function ApproachJourney() {
     <section
       className="approach-section"
       data-approach-section
-      data-chapter-index="07"
+      data-chapter-index="03"
       data-chapter-label="Abordagem"
       data-header-tone="light"
       id="abordagem"
@@ -42,7 +43,12 @@ export function ApproachJourney() {
       <div className="section-frame approach-stage">
         <div className="approach-title" data-reveal>
           <p className="section-kicker">A abordagem</p>
-          <h2>Escuta, compreensão e construção de sentido</h2>
+          <h2>
+            Escuta, compreensão e construção de{" "}
+            <HighlightedText delay={0.12} from="left">
+              sentido
+            </HighlightedText>
+          </h2>
           <p>
             Um percurso de presença e elaboração inspirado pela Logoterapia e
             pela Análise Existencial. Cada processo acontece em seu próprio

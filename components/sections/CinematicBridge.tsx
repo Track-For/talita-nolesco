@@ -1,56 +1,50 @@
 import Image from "next/image";
-import talitaPensante from "@/public/images/optimized/talita-pensante-hq.webp";
+import talitaPerseveranca from "@/public/images/optimized/talita-hero-wide-hq.webp";
 
 export function CinematicBridge() {
   return (
     <section
       aria-labelledby="cinematic-bridge-title"
       className="cinematic-bridge"
-      data-chapter-index="03"
-      data-chapter-label="Presença"
+      data-chapter-index="07"
+      data-chapter-label="Perseverança"
       data-cinema-bridge
-      data-header-tone="dark"
+      data-header-tone="light"
     >
       <div className="cinematic-bridge__stage">
         <p className="cinematic-bridge__backdrop" data-cinema-backdrop>
-          presença
+          perseverança
         </p>
 
         <figure
           className="cinematic-bridge__frame"
           data-cinema-frame
-          data-image-reveal="down"
         >
           <Image
-            alt="Talita em um ambiente de atendimento, em momento de reflexão"
+            alt="Talita sorrindo em uma poltrona, em um ambiente acolhedor"
             fill
             placeholder="blur"
             quality={90}
             sizes="(max-width: 900px) 92vw, 78vw"
-            src={talitaPensante}
-          />
-          <span
-            aria-hidden="true"
-            className="image-curtain image-curtain--down"
-            data-image-curtain
+            src={talitaPerseveranca}
           />
           <span aria-hidden="true" className="cinematic-bridge__wash" />
-        </figure>
 
-        <div className="cinematic-bridge__copy" data-cinema-copy>
-          <p>
-            <span>03</span>
-            <span>Um intervalo de presença</span>
+          <div className="cinematic-bridge__copy" data-cinema-copy>
+            <p>
+              <span>07</span>
+              <span>Um movimento de perseverança</span>
+            </p>
+            <h2 id="cinematic-bridge-title">
+              Seguir também pode ser um jeito de se escutar
+            </h2>
+          </div>
+
+          <p className="cinematic-bridge__caption" data-cinema-caption>
+            Perseverar não é apressar a história. É sustentar, com cuidado, o
+            próximo passo possível
           </p>
-          <h2 id="cinematic-bridge-title">
-            Algumas histórias pedem tempo antes de pedir respostas
-          </h2>
-        </div>
-
-        <p className="cinematic-bridge__caption" data-cinema-caption>
-          Escutar também é permitir que uma experiência encontre seu próprio
-          contorno
-        </p>
+        </figure>
       </div>
     </section>
   );

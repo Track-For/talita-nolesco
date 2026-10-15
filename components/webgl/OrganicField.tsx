@@ -285,10 +285,11 @@ function FieldPlane() {
   const hovering = useRef(false);
   const activeTouch = useRef<number | null>(null);
   const touchReleaseTimer = useRef<number | null>(null);
-  const { gl, size, viewport } = useThree();
+  const wakeUntil = useRef(0);
+  const { gl, invalidate, size, viewport } = useThree();
 
   useEffect(() => {
-    const pixelRatio = Math.min(window.devicePixelRatio || 1, 1.25);
+    const pixelRatio = Math.min(window.devicePixelRatio || 1, 1.1);
     const canvasWidth = Math.max(1, gl.domElement.clientWidth);
     const canvasHeight = Math.max(1, gl.domElement.clientHeight);
     const buffer = new TrailBuffer(
@@ -301,15 +302,16 @@ function FieldPlane() {
     trail.current = buffer;
     const shader = material.current;
     if (shader) shader.uniforms.uTrail.value = buffer.texture;
+    invalidate();
 
     return () => {
       buffer.dispose();
       trail.current = null;
     };
-  }, [gl]);
+  }, [gl, invalidate]);
 
   useEffect(() => {
-    const pixelRatio = Math.min(window.devicePixelRatio || 1, 1.25);
+    const pixelRatio = Math.min(window.devicePixelRatio || 1, 1.1);
     const buffer = trail.current;
     if (!buffer) return;
 
@@ -318,7 +320,8 @@ function FieldPlane() {
       Math.max(1, Math.round(size.width * pixelRatio)),
       Math.max(1, Math.round(size.height * pixelRatio)),
     );
-  }, [size.height, size.width]);
+    invalidate();
+  }, [invalidate, size.height, size.width]);
 
   useEffect(() => {
     const region = gl.domElement.closest(".pause-section") as HTMLElement | null;
@@ -348,6 +351,8 @@ function FieldPlane() {
       const isTouch = event.pointerType === "touch";
       if (isTouch && activeTouch.current !== event.pointerId) return;
       hovering.current = updatePointerPosition(event);
+      wakeUntil.current = performance.now() + 3000;
+      invalidate();
     };
 
     const handlePointerDown = (event: PointerEvent) => {
@@ -358,11 +363,15 @@ function FieldPlane() {
       }
       activeTouch.current = event.pointerId;
       hovering.current = updatePointerPosition(event);
+      wakeUntil.current = performance.now() + 3000;
+      invalidate();
     };
 
     const handlePointerUp = (event: PointerEvent) => {
       if (activeTouch.current !== event.pointerId) return;
       activeTouch.current = null;
+      wakeUntil.current = performance.now() + 3000;
+      invalidate();
       touchReleaseTimer.current = window.setTimeout(() => {
         hovering.current = false;
         touchReleaseTimer.current = null;
@@ -372,6 +381,8 @@ function FieldPlane() {
     const clearPointer = () => {
       activeTouch.current = null;
       hovering.current = false;
+      wakeUntil.current = performance.now() + 3000;
+      invalidate();
       if (touchReleaseTimer.current !== null) {
         window.clearTimeout(touchReleaseTimer.current);
         touchReleaseTimer.current = null;
@@ -379,7 +390,8 @@ function FieldPlane() {
     };
 
     region.addEventListener("pointerdown", handlePointerDown, { passive: true });
-    window.addEventListener("pointermove", handlePointerMove, { passive: true });
+    region.addEventListener("pointermove", handlePointerMove, { passive: true });
+    region.addEventListener("pointerleave", clearPointer, { passive: true });
     window.addEventListener("pointerup", handlePointerUp, { passive: true });
     window.addEventListener("pointercancel", handlePointerUp, { passive: true });
     window.addEventListener("blur", clearPointer);
@@ -387,7 +399,8 @@ function FieldPlane() {
 
     return () => {
       region.removeEventListener("pointerdown", handlePointerDown);
-      window.removeEventListener("pointermove", handlePointerMove);
+      region.removeEventListener("pointermove", handlePointerMove);
+      region.removeEventListener("pointerleave", clearPointer);
       window.removeEventListener("pointerup", handlePointerUp);
       window.removeEventListener("pointercancel", handlePointerUp);
       window.removeEventListener("blur", clearPointer);
@@ -396,7 +409,7 @@ function FieldPlane() {
         window.clearTimeout(touchReleaseTimer.current);
       }
     };
-  }, [gl]);
+  }, [gl, invalidate]);
 
   useFrame((_, delta) => {
     const buffer = trail.current;
@@ -414,6 +427,10 @@ function FieldPlane() {
     buffer.render();
     shader.uniforms.uTime.value += safeDelta;
     shader.uniforms.uTrail.value = buffer.texture;
+
+    if (hovering.current || performance.now() < wakeUntil.current) {
+      invalidate();
+    }
   });
 
   return (
@@ -436,13 +453,13 @@ export function OrganicField({ onLost }: { onLost: () => void }) {
   return (
     <Canvas
       camera={{ position: [0, 0, 1.55], fov: 55 }}
-      dpr={[1, 1.25]}
+      dpr={[1, 1.1]}
       gl={{
         alpha: false,
         antialias: false,
         powerPreference: "low-power",
       }}
-      frameloop="always"
+      frameloop="demand"
     >
       <ContextGuard onLost={onLost} />
       <FieldPlane />

@@ -3,6 +3,7 @@
 import Image from "next/image";
 import { useEffect, useRef, useState } from "react";
 import { navigation } from "@/data/navigation";
+import { talita } from "@/data/talita";
 import { MagneticLink } from "@/components/motion/MagneticLink";
 
 export function Header() {
@@ -30,28 +31,17 @@ export function Header() {
     );
     if (!scenes.length) return;
 
-    let frame = 0;
-    const updateTone = () => {
-      frame = 0;
-      const marker = Math.min(88, window.innerHeight * 0.15);
-      const active = scenes.reduce((current, scene) => {
-        return scene.getBoundingClientRect().top <= marker ? scene : current;
-      }, scenes[0]);
-      setTone(active?.dataset.headerTone === "dark" ? "dark" : "light");
-    };
-    const requestUpdate = () => {
-      if (frame) return;
-      frame = window.requestAnimationFrame(updateTone);
-    };
+    const observer = new IntersectionObserver(
+      (entries) => {
+        const active = entries.find((entry) => entry.isIntersecting);
+        if (!(active?.target instanceof HTMLElement)) return;
+        setTone(active.target.dataset.headerTone === "dark" ? "dark" : "light");
+      },
+      { rootMargin: "-14% 0px -85% 0px", threshold: 0 },
+    );
 
-    updateTone();
-    window.addEventListener("scroll", requestUpdate, { passive: true });
-    window.addEventListener("resize", requestUpdate);
-    return () => {
-      window.removeEventListener("scroll", requestUpdate);
-      window.removeEventListener("resize", requestUpdate);
-      window.cancelAnimationFrame(frame);
-    };
+    scenes.forEach((scene) => observer.observe(scene));
+    return () => observer.disconnect();
   }, []);
 
   useEffect(() => {
@@ -80,11 +70,11 @@ export function Header() {
           <Image
             alt=""
             className="brand-logo brand-logo--header"
-            fetchPriority="high"
             height={289}
             loading="eager"
             sizes="(max-width: 900px) 128px, 176px"
             src="/images/Logo.png"
+            unoptimized
             width={864}
           />
         </a>
@@ -98,8 +88,8 @@ export function Header() {
         </nav>
 
         <div className="header-action">
-          <MagneticLink href="#atendimentos" variant="outline">
-            Conheça o atendimento
+          <MagneticLink href={talita.contact.schedulingHref} variant="outline">
+            Agendar atendimento
           </MagneticLink>
         </div>
 
@@ -130,8 +120,10 @@ export function Header() {
               alt=""
               className="brand-logo brand-logo--menu"
               height={289}
+              loading="eager"
               sizes="140px"
               src="/images/Logo.png"
+              unoptimized
               width={864}
             />
           </span>

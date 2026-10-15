@@ -141,7 +141,7 @@ export function HorizontalReel() {
     <section
       aria-label="Uma sequência de reflexões"
       className="reel-section"
-      data-chapter-index="06"
+      data-chapter-index="08"
       data-chapter-label="Reflexões"
       data-header-tone="light"
       ref={root}

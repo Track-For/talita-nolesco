@@ -2,7 +2,7 @@
 
 ## Aprovação profissional e conteúdo
 
-- Confirmar o CRP `06/144100` e a forma correta de exibição segundo as orientações profissionais aplicáveis.
+- Reconfirmar com Talita o CRP `06/144100`, já publicado no site profissional anterior, antes da publicação definitiva.
 - Validar a redação proposta para “Sobre Talita”: graduação em Psicologia pela Universidade Católica de Santos, atuação no CAPS, facilitação de grupos e estudos em Logoterapia e Análise Existencial.
 - Confirmar se a pós-graduação em Psicologia do Trabalho deve integrar a apresentação profissional e qual é a denominação correta do curso.
 - Revisar com Talita todos os textos sobre Logoterapia e Análise Existencial. O protótipo não a apresenta como especialista em uma formação ainda não confirmada como concluída.
@@ -10,12 +10,10 @@
 - Decidir se o novo site também deve divulgar avaliação psicológica, orientação psicológica, plantão psicológico, psicoterapia breve, orientação vocacional e palestras, serviços encontrados no site anterior.
 - Confirmar duração, frequência, plataforma, disponibilidade e fluxo real do primeiro contato para cada modalidade divulgada.
 - Aprovar hero, manifesto, seção de público, FAQ e CTA final.
-- Confirmar autorização e escolha final das fotografias, crops e ordem de uso.
+- Confirmar autorização e escolha final das fotografias, crops e ordem de uso. Os novos retratos em alta resolução foram gerados a partir das referências existentes e precisam de aprovação explícita da Talita.
 
 ## Links e ativos ausentes
 
-- Cadastrar perfis profissionais reais em `data/socials.ts`; o componente de glow/beam não renderiza links fictícios.
-- Fornecer o arquivo ou URL real do guia gratuito citado na bio. `GuideSection` já está implementado e fica oculto enquanto o recurso não existe.
 - Definir domínio oficial e `NEXT_PUBLIC_SITE_URL` para canonical, sitemap e regras finais de indexação.
 - Revisar a página de privacidade com responsável jurídico antes da publicação e incluir dados reais do controlador e canais de contato.
 - Fornecer imagem OG aprovada caso seja desejada uma prévia social fotográfica.
@@ -24,7 +22,7 @@
 
 - Revisar o protótipo conforme Código de Ética, publicidade CFP/CRP, e requisitos de proteção de dados aplicáveis.
 - Revisar o texto de transparência e consentimento do formulário antes da publicação. O formulário apenas prepara a mensagem no navegador e não mantém dados no site.
-- Manter depoimentos e prints de pacientes fora do site até haver análise ética e jurídica específica; eles não foram usados no protótipo.
+- A seção de depoimentos foi ativada no protótipo conforme solicitado. Antes da publicação definitiva, arquivar a confirmação da Talita e os consentimentos aplicáveis, além da revisão ética/jurídica específica.
 - Trocar `robots` de bloqueio para indexação somente depois de conteúdo, domínio, contato, privacidade e metadata estarem aprovados.
 
 ## Dependências e segurança
@@ -39,7 +37,7 @@
 - Sem displacement no rosto: retratos usam máscara CSS e parallax; o shader fica restrito ao campo abstrato.
 - Sem WebGL em reduced-motion ou quando o navegador não oferece suporte: uma composição CSS preserva cor, textura e conteúdo.
 - Sem pin horizontal em até 900 px ou reduced-motion: os capítulos viram uma sequência vertical integral.
-- Sem guia ou redes confirmadas: os componentes correspondentes não são renderizados.
+- O e-book e as redes sociais profissionais usam os endereços fornecidos pela Talita.
 - Sem JavaScript: conteúdo, imagens e o CTA direto do WhatsApp continuam presentes; o formulário e os aprimoramentos de movimento dependem de JavaScript.
 
 ## Observação de QA

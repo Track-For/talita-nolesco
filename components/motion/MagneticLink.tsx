@@ -11,6 +11,8 @@ const GLOW_RISE = 0.5;
 type MagneticLinkProps = {
   children: ReactNode;
   href: string;
+  rel?: string;
+  target?: "_blank" | "_self";
   variant?: "solid" | "outline" | "text" | "light";
   onClick?: () => void;
 };
@@ -18,6 +20,8 @@ type MagneticLinkProps = {
 export function MagneticLink({
   children,
   href,
+  rel,
+  target,
   variant = "solid",
   onClick,
 }: MagneticLinkProps) {
@@ -27,15 +31,35 @@ export function MagneticLink({
   const rightGlow = useRef<HTMLSpanElement>(null);
   const leftGlow = useRef<HTMLSpanElement>(null);
   const animationFrame = useRef<number | null>(null);
+  const moveX = useRef<ReturnType<typeof gsap.quickTo> | null>(null);
+  const moveY = useRef<ReturnType<typeof gsap.quickTo> | null>(null);
   const hasGlow = variant !== "text";
+
+  useEffect(() => {
+    const element = inner.current;
+    if (!element) return;
+
+    moveX.current = gsap.quickTo(element, "x", {
+      duration: 0.35,
+      ease: "power3.out",
+    });
+    moveY.current = gsap.quickTo(element, "y", {
+      duration: 0.35,
+      ease: "power3.out",
+    });
+
+    return () => {
+      moveX.current = null;
+      moveY.current = null;
+      gsap.killTweensOf(element);
+    };
+  }, []);
 
   useEffect(() => {
     const container = root.current;
     const light = lightTrack.current;
     const right = rightGlow.current;
     const left = leftGlow.current;
-    const innerElement = inner.current;
-
     if (!hasGlow || !container || !light || !right || !left) return;
 
     let bound = container.getBoundingClientRect().width / 2 + 12;
@@ -136,9 +160,6 @@ export function MagneticLink({
       if (animationFrame.current !== null) {
         cancelAnimationFrame(animationFrame.current);
       }
-      if (innerElement) {
-        gsap.killTweensOf(innerElement);
-      }
     };
   }, [hasGlow]);
 
@@ -147,7 +168,8 @@ export function MagneticLink({
       event.pointerType === "touch" ||
       window.matchMedia("(prefers-reduced-motion: reduce)").matches ||
       window.matchMedia("(pointer: coarse)").matches ||
-      !inner.current
+      !moveX.current ||
+      !moveY.current
     ) {
       return;
     }
@@ -156,24 +178,13 @@ export function MagneticLink({
     const x = (event.clientX - bounds.left - bounds.width / 2) * 0.13;
     const y = (event.clientY - bounds.top - bounds.height / 2) * 0.13;
 
-    gsap.to(inner.current, {
-      x,
-      y,
-      duration: 0.35,
-      ease: "power3.out",
-      overwrite: "auto",
-    });
+    moveX.current(x);
+    moveY.current(y);
   }
 
   function reset() {
-    if (!inner.current) return;
-    gsap.to(inner.current, {
-      x: 0,
-      y: 0,
-      duration: 0.55,
-      ease: "elastic.out(1, 0.55)",
-      overwrite: "auto",
-    });
+    moveX.current?.(0);
+    moveY.current?.(0);
   }
 
   return (
@@ -184,6 +195,8 @@ export function MagneticLink({
       onPointerLeave={reset}
       onPointerMove={handleMove}
       ref={root}
+      rel={rel}
+      target={target}
     >
       {hasGlow ? (
         <>

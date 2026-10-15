@@ -3,7 +3,10 @@ import { AudiencePanels } from "@/components/sections/AudiencePanels";
 import { ApproachJourney } from "@/components/sections/ApproachJourney";
 import { Footer } from "@/components/layout/Footer";
 import { GuideSection } from "@/components/sections/GuideSection";
+import { FaqAccordion } from "@/components/sections/FaqAccordion";
 import { HorizontalReel } from "@/components/sections/HorizontalReel";
+import { PracticeResources } from "@/components/sections/PracticeResources";
+import { Testimonials } from "@/components/sections/Testimonials";
 import { Header } from "@/components/layout/Header";
 import { CinemaHud } from "@/components/motion/CinemaHud";
 import { MagneticLink } from "@/components/motion/MagneticLink";
@@ -13,12 +16,14 @@ import { CinematicBridge } from "@/components/sections/CinematicBridge";
 import { WhatsAppContactForm } from "@/components/sections/WhatsAppContactForm";
 import { DirectionalHeading } from "@/components/ui/DirectionalHeading";
 import { OrganicFieldScene } from "@/components/webgl/OrganicFieldScene";
+import { HighlightedText } from "@/registry/spell-ui/highlighted-text";
 import { faq } from "@/data/faq";
 import { visibleServices } from "@/data/services";
 import { journey, talita } from "@/data/talita";
 import talitaCadeira from "@/public/images/optimized/talita-na-cadeira-hq.webp";
 import talitaHero from "@/public/images/optimized/talita-hero-wide-hq.webp";
 import talitaHeroMobile from "@/public/images/optimized/talita-hero-mobile-lower-hq.webp";
+import talitaPensante from "@/public/images/optimized/talita-pensante-hq.webp";
 import talitaSorrindo from "@/public/images/optimized/talita-sorrindo-hq.webp";
 
 function HeroTitle() {
@@ -79,15 +84,15 @@ export default function Home() {
           </p>
           <div className="hero__copy">
             <p className="eyebrow" data-hero-meta>
-              Talita F. Nolasco · Psicóloga
+              Talita F. Nolasco · Psicóloga · CRP {talita.crp.value}
             </p>
             <HeroTitle />
             <p className="hero__description" data-hero-meta>
               {talita.hero.description}
             </p>
             <div className="hero__actions" data-hero-actions>
-              <MagneticLink href="#atendimentos">
-                Conheça o atendimento
+              <MagneticLink href={talita.contact.schedulingHref}>
+                Agendar atendimento
               </MagneticLink>
               <MagneticLink href="#sobre" variant="text">
                 Sobre a Talita
@@ -116,29 +121,8 @@ export default function Home() {
           <OrganicThread />
 
           <section
-            className="manifesto-section"
-            data-chapter-index="02"
-            data-chapter-label="Sentir"
-            data-header-tone="dark"
-          >
-            <div className="section-frame manifesto-section__inner">
-              <p className="manifesto" data-manifesto>
-                Sua história é maior do que um momento difícil. Há espaço para
-                escutar o que você sente. E olhar para o que faz sentido para
-                você
-              </p>
-              <p className="manifesto-note" data-reveal>
-                Entre sentir e florescer existe um caminho que não precisa ser
-                percorrido sozinha
-              </p>
-            </div>
-          </section>
-
-          <CinematicBridge />
-
-          <section
             className="about-section"
-            data-chapter-index="04"
+            data-chapter-index="02"
             data-chapter-label="Talita"
             data-header-tone="light"
             id="sobre"
@@ -174,42 +158,28 @@ export default function Home() {
                 />
               </figure>
 
-              <div className="formation-list" data-reveal>
-                {talita.formation.map((item) => (
-                  <article key={item.title}>
-                    <h3>{item.title}</h3>
-                    <p>{item.detail}</p>
-                  </article>
-                ))}
+              <div className="about-trajectory" data-reveal>
+                <p className="section-kicker">Trajetória profissional</p>
+                <div className="formation-list">
+                  {talita.formation.map((item, index) => (
+                    <article key={item.title}>
+                      <span aria-hidden="true">
+                        {String(index + 1).padStart(2, "0")}
+                      </span>
+                      <h3>{item.title}</h3>
+                      <p>{item.detail}</p>
+                    </article>
+                  ))}
+                </div>
               </div>
             </div>
           </section>
-
-          <section
-            className="audience-section"
-            data-chapter-index="05"
-            data-chapter-label="Para quem"
-            data-header-tone="light"
-          >
-            <div className="section-frame">
-              <div className="section-heading" data-reveal>
-                <h2>Para quem é este espaço?</h2>
-                <p>
-                  Não como uma lista de diagnósticos, mas como pontos de partida
-                  possíveis para uma conversa
-                </p>
-              </div>
-              <AudiencePanels />
-            </div>
-          </section>
-
-          <HorizontalReel />
 
           <ApproachJourney />
 
           <section
             className="services-section"
-            data-chapter-index="08"
+            data-chapter-index="04"
             data-chapter-label="Atendimento"
             data-header-tone="light"
             id="atendimentos"
@@ -220,8 +190,8 @@ export default function Home() {
                   lines={["Modalidades de", "atendimento online"]}
                 />
                 <p>
-                  Conheça as características de cada modalidade e encontre um
-                  primeiro caminho para solicitar informações
+                  Duas formas de acompanhamento, apresentadas de maneira clara
+                  para facilitar o seu primeiro contato.
                 </p>
               </div>
 
@@ -247,7 +217,7 @@ export default function Home() {
                           <li key={feature}>{feature}</li>
                         ))}
                       </ul>
-                      <a href="#contato">Solicitar informações</a>
+                      <a href={talita.contact.schedulingHref}>Ver agenda</a>
                     </div>
                     <span className="service-panel__shape" aria-hidden="true" />
                   </article>
@@ -255,6 +225,71 @@ export default function Home() {
               </div>
             </div>
           </section>
+
+          <div
+            className="audience-sentir-sequence"
+            data-audience-sentir-sequence
+          >
+            <section
+              className="audience-section"
+              data-chapter-index="05"
+              data-chapter-label="Para quem"
+              data-header-tone="light"
+            >
+              <div className="section-frame">
+                <div className="section-heading" data-reveal>
+                  <h2>Para quem é este espaço?</h2>
+                  <p>
+                    Não como uma lista de diagnósticos, mas como pontos de partida
+                    possíveis para uma conversa
+                  </p>
+                </div>
+                <AudiencePanels />
+              </div>
+            </section>
+
+            <section
+              className="manifesto-section"
+              data-chapter-index="06"
+              data-chapter-label="Sentir"
+              data-header-tone="dark"
+              data-manifesto-section
+            >
+              <figure className="manifesto-section__image" data-manifesto-image>
+                <Image
+                  alt=""
+                  aria-hidden="true"
+                  fill
+                  placeholder="blur"
+                  quality={90}
+                  sizes="(max-width: 900px) 100vw, 52vw"
+                  src={talitaPensante}
+                />
+                <span aria-hidden="true" />
+              </figure>
+              <div
+                className="section-frame manifesto-section__inner"
+                data-manifesto-copy
+              >
+                <p className="manifesto" data-manifesto>
+                  Sua história é maior do que um momento difícil. Há espaço para
+                  escutar o que você sente. E olhar para o que faz sentido para
+                  você
+                </p>
+                <p className="manifesto-note">
+                  Entre sentir e florescer existe um caminho que não precisa ser
+                  percorrido sozinha
+                </p>
+              </div>
+            </section>
+
+          </div>
+
+          <CinematicBridge />
+
+          <HorizontalReel />
+
+          <Testimonials approved={talita.testimonials.hasWrittenConsent} />
 
           <section
             className="pause-section"
@@ -284,7 +319,12 @@ export default function Home() {
           >
             <div className="section-frame journey-layout">
               <div className="journey-intro" data-reveal>
-                <h2>Como funciona o primeiro contato?</h2>
+                <h2>
+                  Como funciona o primeiro{" "}
+                  <HighlightedText from="left">
+                    contato?
+                  </HighlightedText>
+                </h2>
                 <p>
                   Do interesse inicial ao começo do acompanhamento, cada etapa
                   ajuda a tornar o processo mais claro
@@ -294,7 +334,6 @@ export default function Home() {
                 {journey.map((item, index) => (
                   <article
                     className="journey-card"
-                    data-reveal
                     key={item.title}
                     style={{ "--card-index": index } as React.CSSProperties}
                   >
@@ -309,36 +348,40 @@ export default function Home() {
             </div>
           </section>
 
+          <PracticeResources
+            schedulingHref={talita.contact.schedulingHref}
+            temperamentTestHref={talita.resources.temperamentTestHref}
+          />
+
           <GuideSection guide={talita.guide} />
 
-          <section className="faq-section" id="duvidas">
+          <section
+            className="faq-section"
+            data-chapter-index="12"
+            data-chapter-label="Dúvidas"
+            data-header-tone="light"
+            id="duvidas"
+          >
             <div className="section-frame faq-layout">
               <div className="faq-intro" data-reveal>
-                <h2>Dúvidas antes de entrar em contato</h2>
+                <h2>
+                  Dúvidas antes de entrar em{" "}
+                  <HighlightedText delay={0.12} from="left">
+                    contato
+                  </HighlightedText>
+                </h2>
                 <p>
                   Informações iniciais para compreender as modalidades e dar o
                   próximo passo com mais segurança
                 </p>
               </div>
-              <div className="faq-list" data-reveal>
-                {faq.map((item) => (
-                  <details key={item.question}>
-                    <summary>
-                      <span>{item.question}</span>
-                      <span aria-hidden="true" className="faq-icon" />
-                    </summary>
-                    <div className="faq-answer">
-                      <p>{item.answer}</p>
-                    </div>
-                  </details>
-                ))}
-              </div>
+              <FaqAccordion items={faq} />
             </div>
           </section>
 
           <section
             className="contact-form-section"
-            data-chapter-index="10"
+            data-chapter-index="13"
             data-chapter-label="Contato"
             data-header-tone="light"
             id="contato"
@@ -390,15 +433,12 @@ export default function Home() {
                 Conheça as modalidades de psicoterapia online e converse sobre
                 a possibilidade de iniciar seu acompanhamento
               </p>
-              {talita.contact.href ? (
-                <MagneticLink href={talita.contact.href} variant="light">
-                  {talita.contact.label}
-                </MagneticLink>
-              ) : (
-                <span aria-disabled="true" className="button button--disabled">
-                  <span>{talita.contact.label}</span>
-                </span>
-              )}
+              <MagneticLink
+                href={talita.contact.schedulingHref}
+                variant="light"
+              >
+                Agendar atendimento online
+              </MagneticLink>
             </div>
           </section>
         </div>

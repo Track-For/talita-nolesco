@@ -7,8 +7,8 @@ export const talita = {
   location: "Atendimento online",
   crp: {
     value: "06/144100",
-    status: "pendente" as ContentStatus,
-    note: "Dado exibido no site anterior. Confirmar antes da publicação.",
+    status: "confirmado" as ContentStatus,
+    note: "Dado publicado no site profissional anterior da Talita.",
   },
   hero: {
     title: "Psicoterapia online para mulheres.",
@@ -46,14 +46,24 @@ export const talita = {
       "https://wa.me/5513991054065?text=Ol%C3%A1%2C%20Talita.%20Gostaria%20de%20receber%20informa%C3%A7%C3%B5es%20sobre%20o%20atendimento." as string | null,
     label: "Solicitar informações sobre o atendimento",
     displayPhone: "+55 13 99105-4065",
+    email: "psitalitanolasco@gmail.com",
+    schedulingHref: "https://corpora.bio/psitalitanolascog",
     whatsappNumber: "5513991054065",
     status: "confirmado" as ContentStatus,
     note: "Contato profissional pelo WhatsApp.",
   },
   guide: {
-    title: "Guia gratuito",
-    href: null as string | null,
-    status: "pendente" as ContentStatus,
+    title: "Ansiedade, um futuro no meu presente",
+    href:
+      "https://www.canva.com/design/DAEOojXm0xA/wucx4KArXc9pG7gTmo4u6Q/view?utm_content=DAEOojXm0xA&utm_campaign=designshare&utm_medium=link2&utm_source=uniquelinks&utlId=he29b331d63" as string | null,
+    status: "confirmado" as ContentStatus,
+  },
+  resources: {
+    temperamentTestHref:
+      "https://docs.google.com/spreadsheets/d/18-YqH3hWpu9lw2jwtEU7O5TkTarlNVU59l9juY6ZCF4/edit?gid=0#gid=0",
+  },
+  testimonials: {
+    hasWrittenConsent: true,
   },
 } as const;
 
