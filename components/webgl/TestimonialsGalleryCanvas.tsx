@@ -72,9 +72,18 @@ function TestimonialPlane({
   const [hovered, setHovered] = useState(false);
   const sourceTexture = useLoader(TextureLoader, testimonial.src);
   const renderer = useThree((state) => state.gl);
+  const viewportWidth = useThree((state) => state.size.width);
+  const compact = viewportWidth <= 900;
   const aspect = testimonial.width / testimonial.height;
-  const planeHeight = aspect < 0.9 ? 2.35 : 1.9;
-  const planeWidth = Math.min(4.5, planeHeight * aspect);
+  const compactPlaneWidth = 1.42;
+  const planeHeight = compact
+    ? compactPlaneWidth / aspect
+    : aspect < 0.9
+      ? 2.35
+      : 1.9;
+  const planeWidth = compact
+    ? compactPlaneWidth
+    : Math.min(4.5, planeHeight * aspect);
   const z = -index * DEPTH_STEP;
 
   const texture = useMemo(() => {
@@ -120,8 +129,8 @@ function TestimonialPlane({
   return (
     <mesh
       position={[
-        X_OFFSETS[index % X_OFFSETS.length],
-        0,
+        compact ? 0 : X_OFFSETS[index % X_OFFSETS.length],
+        compact ? -0.58 : 0,
         z,
       ]}
       rotation={[0, index % 2 === 0 ? 0.055 : -0.055, 0]}
@@ -151,7 +160,12 @@ function TestimonialsScene({
   progressRef: { current: number };
   testimonials: TestimonialTexture[];
 }) {
-  const travel = CAMERA_START + (testimonials.length - 1) * DEPTH_STEP + 2.6;
+  const viewportWidth = useThree((state) => state.size.width);
+  const compact = viewportWidth <= 900;
+  const finalApproachDistance = 2.5;
+  const travelOffset = compact ? -finalApproachDistance : 2.6;
+  const travel =
+    CAMERA_START + (testimonials.length - 1) * DEPTH_STEP + travelOffset;
 
   useFrame(({ camera }, delta) => {
     const targetZ = CAMERA_START - progressRef.current * travel;

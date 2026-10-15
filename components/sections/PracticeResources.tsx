@@ -22,7 +22,7 @@ export function PracticeResources({
           <h2>Continue no seu ritmo</h2>
           <p>
             Acesse um material de autoconhecimento ou consulte diretamente os
-            horários disponíveis para atendimento online.
+            horários disponíveis para atendimento online
           </p>
         </div>
 
@@ -39,7 +39,7 @@ export function PracticeResources({
               <strong>Teste de temperamento</strong>
               <small>
                 Material externo de autoconhecimento. Não substitui avaliação
-                psicológica.
+                psicológica
               </small>
             </span>
             <ExternalLink aria-hidden="true" strokeWidth={1.55} />
@@ -55,7 +55,7 @@ export function PracticeResources({
             </span>
             <span>
               <strong>Agendamento online</strong>
-              <small>Consulte a agenda e escolha um horário disponível.</small>
+              <small>Consulte a agenda e escolha um horário disponível</small>
             </span>
             <ExternalLink aria-hidden="true" strokeWidth={1.55} />
           </a>

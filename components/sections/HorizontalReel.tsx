@@ -32,10 +32,15 @@ export function HorizontalReel() {
 
       const media = gsap.matchMedia();
       media.add(
-        "(min-width: 901px) and (prefers-reduced-motion: no-preference)",
+        "(prefers-reduced-motion: no-preference)",
         () => {
           section.dataset.enhanced = "true";
           const distance = () => Math.max(0, track.scrollWidth - window.innerWidth);
+          const scrollDistance = () =>
+            Math.max(
+              distance(),
+              window.innerWidth <= 900 ? window.innerHeight * 2.2 : 0,
+            );
 
           const tween = gsap.to(track, {
             x: () => -distance(),
@@ -43,7 +48,7 @@ export function HorizontalReel() {
             scrollTrigger: {
               trigger: section,
               start: "top top",
-              end: () => `+=${distance()}`,
+              end: () => `+=${scrollDistance()}`,
               pin: true,
               scrub: 0.8,
               invalidateOnRefresh: true,
@@ -69,7 +74,7 @@ export function HorizontalReel() {
                   scrollTrigger: {
                     trigger: section,
                     start: "top top",
-                    end: () => `+=${distance() * 0.52}`,
+                    end: () => `+=${scrollDistance() * 0.52}`,
                     scrub: 0.65,
                     invalidateOnRefresh: true,
                   },
@@ -85,7 +90,7 @@ export function HorizontalReel() {
                     scrollTrigger: {
                       trigger: section,
                       start: "top top",
-                      end: () => `+=${distance() * 0.52}`,
+                      end: () => `+=${scrollDistance() * 0.52}`,
                       scrub: 0.65,
                       invalidateOnRefresh: true,
                     },
@@ -99,36 +104,6 @@ export function HorizontalReel() {
             delete section.dataset.enhanced;
             delete section.dataset.tone;
           };
-        },
-      );
-
-      media.add(
-        "(max-width: 900px) and (prefers-reduced-motion: no-preference)",
-        () => {
-          const portrait = track.querySelector<HTMLElement>(
-            "[data-image-reveal='band-reel']",
-          );
-          const curtain = portrait?.querySelector<HTMLElement>(
-            "[data-image-curtain]",
-          );
-          if (!portrait || !curtain) return;
-
-          const reveal = gsap.fromTo(
-            curtain,
-            { xPercent: 0 },
-            {
-              xPercent: -101,
-              duration: 1.15,
-              ease: "power3.inOut",
-              scrollTrigger: {
-                trigger: portrait,
-                start: "top 88%",
-                once: true,
-              },
-            },
-          );
-
-          return () => reveal.kill();
         },
       );
 

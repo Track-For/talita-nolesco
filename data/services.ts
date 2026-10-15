@@ -17,7 +17,7 @@ export const visibleServices: Service[] = [
     title: "Psicoterapia individual online",
     summary: "Um encontro reservado para olhar com atenção para a sua experiência",
     detail:
-      "Um acompanhamento construído em diálogo, com escuta dedicada às emoções, relações, escolhas e questões que fazem parte da sua história.",
+      "Um acompanhamento construído em diálogo, com escuta dedicada às emoções, relações, escolhas e questões que fazem parte da sua história",
     features: [
       "Encontros individuais e online",
       "Escuta dedicada à experiência pessoal",
@@ -31,7 +31,7 @@ export const visibleServices: Service[] = [
     title: "Psicoterapia em grupo online",
     summary: "Um espaço coletivo, mediado profissionalmente, para experiências que podem encontrar ressonância",
     detail:
-      "Uma proposta de cuidado em contexto coletivo, na qual a escuta e as trocas acontecem com mediação profissional e atenção ao percurso de cada participante.",
+      "Uma proposta de cuidado em contexto coletivo, na qual a escuta e as trocas acontecem com mediação profissional e atenção ao percurso de cada participante",
     features: [
       "Encontros coletivos e online",
       "Mediação profissional",

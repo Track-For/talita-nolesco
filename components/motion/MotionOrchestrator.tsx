@@ -863,6 +863,83 @@ export function MotionOrchestrator({ children }: { children: ReactNode }) {
         });
 
         media.add("(max-width: 900px)", () => {
+          const bridge = scope.querySelector<HTMLElement>(
+            "[data-cinema-bridge]",
+          );
+          const frame = bridge?.querySelector<HTMLElement>(
+            "[data-cinema-frame]",
+          );
+          const image = frame?.querySelector<HTMLElement>("img");
+          const backdrop = bridge?.querySelector<HTMLElement>(
+            "[data-cinema-backdrop]",
+          );
+          const copy = bridge?.querySelector<HTMLElement>(
+            "[data-cinema-copy]",
+          );
+          const caption = bridge?.querySelector<HTMLElement>(
+            "[data-cinema-caption]",
+          );
+          let mobileCinemaTimeline: gsap.core.Timeline | undefined;
+
+          if (bridge && frame && image && backdrop && copy && caption) {
+            bridge.dataset.enhanced = "true";
+            gsap.set(backdrop, { xPercent: 8, autoAlpha: 0 });
+
+            mobileCinemaTimeline = gsap.timeline({
+              scrollTrigger: {
+                trigger: bridge,
+                start: "top top",
+                end: () => `+=${window.innerHeight * 1.25}`,
+                pin: true,
+                scrub: 0.75,
+                anticipatePin: 1,
+                refreshPriority: 1,
+                invalidateOnRefresh: true,
+              },
+            });
+
+            mobileCinemaTimeline
+              .to(
+                backdrop,
+                {
+                  xPercent: -8,
+                  autoAlpha: 0.42,
+                  duration: 1,
+                  ease: "none",
+                },
+                0,
+              )
+              .fromTo(
+                frame,
+                { scale: 0.92, rotation: -0.65, autoAlpha: 1 },
+                {
+                  scale: 1,
+                  rotation: 0,
+                  autoAlpha: 1,
+                  duration: 1,
+                  ease: "power2.out",
+                },
+                0,
+              )
+              .fromTo(
+                image,
+                { scale: 1.09 },
+                { scale: 1.01, duration: 1, ease: "none" },
+                0,
+              )
+              .fromTo(
+                copy,
+                { yPercent: 24, autoAlpha: 0 },
+                {
+                  yPercent: 0,
+                  autoAlpha: 1,
+                  duration: 0.52,
+                  ease: "power1.out",
+                },
+                0.12,
+              );
+          }
+
           const approachCards = gsap.utils.toArray<HTMLElement>(
             "[data-approach-concept]",
             scope,
@@ -882,9 +959,16 @@ export function MotionOrchestrator({ children }: { children: ReactNode }) {
               },
             });
           });
+
+          return () => {
+            mobileCinemaTimeline?.kill();
+            if (bridge) delete bridge.dataset.enhanced;
+          };
         });
 
-        media.add("(min-width: 768px)", () => {
+        media.add("(min-width: 1px)", () => {
+          const compact = window.innerWidth < 768;
+
           gsap.utils
             .toArray<HTMLElement>("[data-parallax]", scope)
             .forEach((frame) => {
@@ -893,9 +977,9 @@ export function MotionOrchestrator({ children }: { children: ReactNode }) {
 
               gsap.fromTo(
                 image,
-                { yPercent: -5 },
+                { yPercent: compact ? -2.5 : -5 },
                 {
-                  yPercent: 6,
+                  yPercent: compact ? 3.5 : 6,
                   ease: "none",
                   scrollTrigger: {
                     trigger: frame,

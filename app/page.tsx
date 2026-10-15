@@ -191,7 +191,7 @@ export default function Home() {
                 />
                 <p>
                   Duas formas de acompanhamento, apresentadas de maneira clara
-                  para facilitar o seu primeiro contato.
+                  para facilitar o seu primeiro contato
                 </p>
               </div>
 
@@ -298,7 +298,7 @@ export default function Home() {
           >
             <OrganicFieldScene />
             <div className="pause-section__content">
-              <p>Uma pausa entre capítulos.</p>
+              <p>Uma pausa entre capítulos</p>
               <h2 id="pause-title">Dar espaço ao que ainda não tem nome</h2>
               <p>
                 Nem tudo precisa ser compreendido de uma vez. A escuta também

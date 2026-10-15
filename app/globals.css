@@ -3552,11 +3552,20 @@ h3 {
     min-height: auto;
   }
 
-  .reel-panel,
-  .reel-section[data-enhanced="true"] .reel-panel {
+  .reel-panel {
     width: auto;
     min-height: 72dvh;
     padding-block: 6rem;
+  }
+
+  .reel-section[data-enhanced="true"] {
+    min-height: 100svh;
+  }
+
+  .reel-section[data-enhanced="true"] .reel-panel {
+    width: 100vw;
+    min-height: 100svh;
+    padding-block: calc(var(--header-height) + 3rem) 4rem;
   }
 
   .reel-panel h2 {
@@ -3576,6 +3585,83 @@ h3 {
     right: -2%;
     width: min(72vw, 25rem);
     opacity: 0.72;
+  }
+
+  .testimonials-section.is-immersive {
+    height: 700svh;
+    min-height: 0;
+  }
+
+  .testimonials-gallery__stage {
+    height: 100svh;
+    min-height: 0;
+  }
+
+  .testimonials-gallery__fallback-card {
+    top: 62%;
+    right: var(--page-pad);
+    left: var(--page-pad);
+    width: auto;
+    height: min(52svh, 29rem);
+  }
+
+  .testimonials-gallery__veil {
+    background:
+      linear-gradient(
+        180deg,
+        color-mix(in srgb, var(--plum-deep) 99%, transparent) 0%,
+        color-mix(in srgb, var(--plum-deep) 92%, transparent) 30%,
+        color-mix(in srgb, var(--plum-deep) 18%, transparent) 58%,
+        color-mix(in srgb, var(--plum-deep) 74%, transparent) 100%
+      );
+  }
+
+  .testimonials-gallery__intro {
+    top: calc(var(--header-height) + 2rem);
+    right: var(--page-pad);
+    left: var(--page-pad);
+    width: auto;
+    transform: none;
+  }
+
+  .testimonials-gallery__intro .section-kicker {
+    max-width: calc(100% - 5rem);
+    margin-block-end: 0.75rem;
+  }
+
+  .testimonials-gallery__intro h2 {
+    max-width: 12.5ch;
+    font-size: clamp(2.35rem, 10.8vw, 3.4rem);
+    line-height: 0.92;
+  }
+
+  .testimonials-gallery__intro > p:last-child {
+    max-width: 28ch;
+    margin-block-start: 0.85rem;
+    font-size: 0.78rem;
+    line-height: 1.4;
+  }
+
+  .testimonials-gallery__counter {
+    top: calc(var(--header-height) + 2.2rem);
+  }
+
+  .testimonials-gallery__instruction {
+    right: var(--page-pad);
+    bottom: 3.6rem;
+    left: var(--page-pad);
+    font-size: 0.58rem;
+  }
+
+  .testimonials-gallery__rail {
+    right: auto;
+    bottom: 2rem;
+    left: var(--page-pad);
+  }
+
+  .testimonials-gallery__rail span,
+  .testimonials-gallery__rail span[data-active="true"] {
+    width: clamp(1.8rem, 13vw, 3rem);
   }
 
   .approach-section {

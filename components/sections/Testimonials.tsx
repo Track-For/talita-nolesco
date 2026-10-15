@@ -44,6 +44,7 @@ export function Testimonials({ approved }: { approved: boolean }) {
   const sectionRef = useRef<HTMLElement>(null);
   const progressRef = useRef(0);
   const [enhanced, setEnhanced] = useState(false);
+  const [webglSupported, setWebglSupported] = useState(false);
   const [active, setActive] = useState(false);
   const [failed, setFailed] = useState(false);
   const [activeIndex, setActiveIndex] = useState(0);
@@ -51,29 +52,27 @@ export function Testimonials({ approved }: { approved: boolean }) {
 
   useEffect(() => {
     const reduced = window.matchMedia("(prefers-reduced-motion: reduce)");
-    const desktop = window.matchMedia("(min-width: 901px)");
 
     const update = () => {
-      setEnhanced(desktop.matches && !reduced.matches && supportsWebGL());
+      setEnhanced(!reduced.matches);
+      setWebglSupported(supportsWebGL());
     };
 
     update();
     reduced.addEventListener("change", update);
-    desktop.addEventListener("change", update);
 
     return () => {
       reduced.removeEventListener("change", update);
-      desktop.removeEventListener("change", update);
     };
   }, []);
 
   useEffect(() => {
     const section = sectionRef.current;
-    if (!section || !enhanced || failed) return;
+    if (!section || !enhanced || failed || !webglSupported) return;
 
     const observer = new IntersectionObserver(
       ([entry]) => setActive(entry.isIntersecting),
-      { rootMargin: "100% 0px", threshold: 0.01 },
+      { rootMargin: "200% 0px", threshold: 0.01 },
     );
     observer.observe(section);
 
@@ -85,7 +84,7 @@ export function Testimonials({ approved }: { approved: boolean }) {
       window.cancelAnimationFrame(refreshFrame);
       observer.disconnect();
     };
-  }, [enhanced, failed]);
+  }, [enhanced, failed, webglSupported]);
 
   useGSAP(
     () => {
@@ -122,7 +121,7 @@ export function Testimonials({ approved }: { approved: boolean }) {
 
   if (!approved) return null;
 
-  const webglActive = enhanced && !failed;
+  const webglActive = enhanced && webglSupported && !failed;
   const immersive = enhanced;
   const activeTestimonial = testimonials[activeIndex] ?? testimonials[0];
 
@@ -146,7 +145,7 @@ export function Testimonials({ approved }: { approved: boolean }) {
                 progressRef={progressRef}
                 testimonials={testimonialTextures}
               />
-            ) : failed ? (
+            ) : !webglActive ? (
               <figure className="testimonials-gallery__fallback-card">
                 <Image
                   alt=""
@@ -164,7 +163,7 @@ export function Testimonials({ approved }: { approved: boolean }) {
           <div className="testimonials-gallery__intro">
             <p className="section-kicker">Relatos compartilhados</p>
             <h2 id="testimonials-title">Palavras de quem viveu esse processo</h2>
-            <p>Mensagens compartilhadas com identidade preservada.</p>
+            <p>Mensagens compartilhadas com identidade preservada</p>
           </div>
 
           <p className="testimonials-gallery__counter" aria-live="polite">
@@ -200,7 +199,7 @@ export function Testimonials({ approved }: { approved: boolean }) {
           <div className="testimonials-intro" data-reveal>
             <p className="section-kicker">Relatos compartilhados</p>
             <h2 id="testimonials-title">Palavras de quem viveu esse processo</h2>
-            <p>Mensagens compartilhadas com identidade preservada.</p>
+            <p>Mensagens compartilhadas com identidade preservada</p>
           </div>
 
           <div className="testimonials-track">
