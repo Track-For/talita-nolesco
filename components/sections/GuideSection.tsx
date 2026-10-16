@@ -26,8 +26,8 @@ export function GuideSection({ guide }: { guide: Guide }) {
           <p className="section-kicker">E-book gratuito</p>
           <h2 id="guide-title">{guide.title}</h2>
           <p>
-            Um material de Talita para refletir sobre como a ansiedade pode
-            aproximar o futuro da experiência presente
+            Preparei este material para ajudar você a refletir sobre como a
+            ansiedade pode aproximar o futuro da experiência presente
           </p>
           <MagneticLink
             href={guide.href}

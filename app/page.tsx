@@ -95,7 +95,7 @@ export default function Home() {
                 Agendar atendimento
               </MagneticLink>
               <MagneticLink href="#sobre" variant="text">
-                Sobre a Talita
+                Sobre mim
               </MagneticLink>
             </div>
           </div>
@@ -123,15 +123,15 @@ export default function Home() {
           <section
             className="about-section"
             data-chapter-index="02"
-            data-chapter-label="Talita"
+            data-chapter-label="Sobre mim"
             data-header-tone="light"
             id="sobre"
           >
             <div className="section-frame about-layout">
               <div className="about-intro" data-reveal>
-                <p className="section-kicker">Sobre Talita</p>
+                <p className="section-kicker">Sobre mim</p>
                 <DirectionalHeading
-                  lines={["Uma trajetória dedicada", "à escuta e ao cuidado"]}
+                  lines={["Minha trajetória dedicada", "à escuta e ao cuidado"]}
                 />
                 {talita.about.paragraphs.map((paragraph) => (
                   <p key={paragraph}>{paragraph}</p>
@@ -190,8 +190,8 @@ export default function Home() {
                   lines={["Modalidades de", "atendimento online"]}
                 />
                 <p>
-                  Duas formas de acompanhamento, apresentadas de maneira clara
-                  para facilitar o seu primeiro contato
+                  Apresento duas formas de acompanhamento para facilitar o seu
+                  primeiro contato comigo
                 </p>
               </div>
 
@@ -240,8 +240,8 @@ export default function Home() {
                 <div className="section-heading" data-reveal>
                   <h2>Para quem é este espaço?</h2>
                   <p>
-                    Não como uma lista de diagnósticos, mas como pontos de partida
-                    possíveis para uma conversa
+                    Não proponho uma lista de diagnósticos, mas pontos de partida
+                    possíveis para a nossa conversa
                   </p>
                 </div>
                 <AudiencePanels />
@@ -301,8 +301,8 @@ export default function Home() {
               <p>Uma pausa entre capítulos</p>
               <h2 id="pause-title">Dar espaço ao que ainda não tem nome</h2>
               <p>
-                Nem tudo precisa ser compreendido de uma vez. A escuta também
-                pode começar pelo que ainda parece difícil de dizer
+                Nem tudo precisa ser compreendido de uma vez. Nossa escuta
+                também pode começar pelo que ainda parece difícil de dizer
               </p>
               <span className="pause-section__hint" aria-hidden="true">
                 Toque ou mova o cursor para revelar
@@ -326,8 +326,8 @@ export default function Home() {
                   </HighlightedText>
                 </h2>
                 <p>
-                  Do interesse inicial ao começo do acompanhamento, cada etapa
-                  ajuda a tornar o processo mais claro
+                  Do seu interesse inicial ao começo do acompanhamento, sigo
+                  com você por etapas que tornam o processo mais claro
                 </p>
               </div>
               <div className="journey-cards">
@@ -371,8 +371,8 @@ export default function Home() {
                   </HighlightedText>
                 </h2>
                 <p>
-                  Informações iniciais para compreender as modalidades e dar o
-                  próximo passo com mais segurança
+                  Reuni informações para você compreender as modalidades e dar
+                  o próximo passo com mais segurança
                 </p>
               </div>
               <FaqAccordion items={faq} />
@@ -388,7 +388,7 @@ export default function Home() {
           >
             <div className="section-frame contact-form-layout">
               <div className="contact-form-intro" data-reveal>
-                <h2>Conte um pouco do que você procura</h2>
+                <h2>Conte-me um pouco do que você procura</h2>
                 <p>
                   Preencha os campos para preparar sua mensagem. Você poderá
                   revisar tudo no WhatsApp antes de enviar
@@ -430,8 +430,8 @@ export default function Home() {
                 lines={["Sua história merece", "um espaço de escuta"]}
               />
               <p className="contact-section__lead">
-                Conheça as modalidades de psicoterapia online e converse sobre
-                a possibilidade de iniciar seu acompanhamento
+                Conheça as modalidades de psicoterapia online e converse comigo
+                sobre a possibilidade de iniciar seu acompanhamento
               </p>
               <MagneticLink
                 href={talita.contact.schedulingHref}

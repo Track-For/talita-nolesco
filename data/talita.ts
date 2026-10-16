@@ -13,14 +13,14 @@ export const talita = {
   hero: {
     title: "Psicoterapia online para mulheres.",
     description:
-      "Um espaço de escuta para compreender emoções, relações e escolhas com mais clareza e acolhimento",
+      "Ofereço um espaço de escuta para você compreender emoções, relações e escolhas com mais clareza e acolhimento",
     status: "provisorio" as ContentStatus,
   },
   about: {
-    title: "Uma trajetória dedicada à escuta e ao cuidado.",
+    title: "Minha trajetória é dedicada à escuta e ao cuidado.",
     paragraphs: [
-      "Formada em Psicologia pela Universidade Católica de Santos, Talita construiu sua trajetória profissional em diferentes espaços de cuidado, incluindo a atuação no CAPS e a facilitação de grupos",
-      "Seus estudos em Logoterapia e Análise Existencial ampliam uma prática atenta à história, aos vínculos, às escolhas e aos sentidos que cada pessoa constrói ao longo da vida",
+      "Sou formada em Psicologia pela Universidade Católica de Santos e construí minha trajetória profissional em diferentes espaços de cuidado, incluindo minha atuação no CAPS e a facilitação de grupos",
+      "Meus estudos em Logoterapia e Análise Existencial ampliam minha prática, atenta à história, aos vínculos, às escolhas e aos sentidos que cada pessoa constrói ao longo da vida",
     ],
     status: "provisorio" as ContentStatus,
   },
@@ -72,31 +72,31 @@ export const approachConcepts = [
     title: "Escuta",
     sides: 3,
     description:
-      "Um espaço para nomear experiências e perceber o que pede atenção, no ritmo possível para cada pessoa",
+      "Ofereço um espaço para você nomear experiências e perceber o que pede atenção, no ritmo que for possível",
   },
   {
     title: "Acolhimento",
     sides: 4,
     description:
-      "Uma presença sem pressa, que recebe dúvidas e emoções sem reduzir a experiência a rótulos",
+      "Acolho dúvidas e emoções sem pressa e sem reduzir a sua experiência a rótulos",
   },
   {
     title: "Compreensão",
     sides: 5,
     description:
-      "Uma conversa que considera emoções, relações, escolhas e contexto, sem respostas prontas sobre a sua história",
+      "Em nossa conversa, considero emoções, relações, escolhas e contexto, sem respostas prontas sobre a sua história",
   },
   {
     title: "Elaboração",
     sides: 8,
     description:
-      "Um processo de construir linguagem e novas perspectivas para aquilo que antes parecia difícil de organizar",
+      "Construo com você novas formas de nomear e olhar para aquilo que antes parecia difícil de organizar",
   },
   {
     title: "Sentido",
     sides: 24,
     description:
-      "Perguntas que podem ajudar a olhar para valores e possibilidades. Não é uma sequência garantida de tratamento",
+      "Trago perguntas que podem ajudar você a olhar para valores e possibilidades, sem impor uma sequência rígida ao processo",
   },
 ] as const;
 
@@ -104,22 +104,22 @@ export const journey = [
   {
     title: "Conhecer as modalidades",
     description:
-      "Veja as formas de atendimento apresentadas neste protótipo e identifique qual delas deseja compreender melhor",
+      "Conheça as formas de atendimento que ofereço e identifique qual delas você deseja compreender melhor",
   },
   {
     title: "Solicitar informações",
     description:
-      "Use o canal profissional indicado no site para consultar disponibilidade e tirar dúvidas sobre o atendimento",
+      "Fale comigo pelo canal profissional indicado no site para consultar disponibilidade e tirar suas dúvidas",
   },
   {
     title: "Alinhar os detalhes",
     description:
-      "Formato, disponibilidade, frequência e demais condições são conversados diretamente, sem pressupostos neste site",
+      "Conversamos diretamente sobre formato, disponibilidade, frequência e demais condições do atendimento",
   },
   {
     title: "Iniciar o acompanhamento",
     description:
-      "Depois do alinhamento inicial, o acompanhamento pode começar conforme a disponibilidade da profissional e da pessoa interessada",
+      "Depois do alinhamento inicial, podemos começar o acompanhamento conforme a minha disponibilidade e a sua",
   },
 ] as const;
 

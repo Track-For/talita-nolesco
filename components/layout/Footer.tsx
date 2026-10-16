@@ -43,7 +43,7 @@ export function Footer() {
         </nav>
         <div className="site-footer__legal">
           <Link href="/privacidade">Privacidade</Link>
-          <p>Atendimento psicológico online com horário previamente agendado.</p>
+          <p>Ofereço atendimento psicológico online com horário previamente agendado.</p>
         </div>
       </div>
       <div className="site-footer__base">

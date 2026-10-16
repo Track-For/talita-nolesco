@@ -18,7 +18,7 @@ const cormorant = Cormorant_Garamond({
 export const metadata: Metadata = {
   title: "Talita F. Nolasco | Psicóloga Online para Mulheres",
   description:
-    "Psicoterapia online para mulheres que desejam compreender suas emoções, relações e a própria história.",
+    "Ofereço psicoterapia online para mulheres que desejam compreender suas emoções, relações e a própria história.",
   applicationName: "Talita F. Nolasco",
   keywords: [
     "psicóloga online",
@@ -29,7 +29,7 @@ export const metadata: Metadata = {
   openGraph: {
     title: "Talita F. Nolasco | Psicóloga Online para Mulheres",
     description:
-      "Um espaço para olhar para si com mais acolhimento. Protótipo conceitual sujeito à aprovação profissional.",
+      "Ofereço um espaço para você olhar para si com mais acolhimento. Protótipo conceitual sujeito à aprovação profissional.",
     locale: "pt_BR",
     type: "website",
   },

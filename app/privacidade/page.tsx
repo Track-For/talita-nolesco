@@ -13,7 +13,7 @@ export default function PrivacyPage() {
       </Link>
       <article>
         <p className="section-kicker">Privacidade</p>
-        <h1>Como este protótipo trata dados.</h1>
+        <h1>Como trato seus dados neste site.</h1>
         <p>
           Esta versão conceitual não possui área de login, cookies de análise,
           pixel de publicidade ou ferramenta de acompanhamento de comportamento.
@@ -28,13 +28,13 @@ export default function PrivacyPage() {
         <p>
           O tratamento de dados realizado depois da abertura do WhatsApp está
           sujeito aos termos e às práticas de privacidade desse serviço e ao
-          atendimento profissional de Talita.
+          meu atendimento profissional.
         </p>
         <h2>Publicação</h2>
         <p>
-          Antes da publicação, Talita deve revisar este texto e definir como serão
-          recebidas solicitações relacionadas a dados pessoais. Também será
-          necessário registrar a data da última atualização.
+          Antes da publicação, preciso revisar este texto e definir como vou
+          receber solicitações relacionadas a dados pessoais. Também preciso
+          registrar a data da última atualização.
         </p>
         <p className="validation-note">
           Texto provisório. Revisar requisitos de privacidade e proteção de dados

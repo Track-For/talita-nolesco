@@ -34,7 +34,7 @@ export function WhatsAppContactForm({
     <form className="whatsapp-form" onSubmit={handleSubmit}>
       <div className="whatsapp-form__fields">
         <div className="form-field">
-          <label htmlFor="contact-name">Como podemos chamar você?</label>
+          <label htmlFor="contact-name">Como posso chamar você?</label>
           <input
             autoComplete="name"
             id="contact-name"
@@ -78,8 +78,7 @@ export function WhatsAppContactForm({
       <label className="whatsapp-form__consent">
         <input name="consent" required type="checkbox" />
         <span>
-          Concordo em abrir o WhatsApp e enviar estas informações diretamente
-          para Talita
+          Concordo em abrir o WhatsApp para enviar estas informações
         </span>
       </label>
 

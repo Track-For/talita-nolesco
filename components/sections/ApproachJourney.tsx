@@ -42,7 +42,7 @@ export function ApproachJourney() {
     >
       <div className="section-frame approach-stage">
         <div className="approach-title" data-reveal>
-          <p className="section-kicker">A abordagem</p>
+          <p className="section-kicker">Minha abordagem</p>
           <h2>
             Escuta, compreensão e construção de{" "}
             <HighlightedText delay={0.12} from="left">
@@ -50,9 +50,10 @@ export function ApproachJourney() {
             </HighlightedText>
           </h2>
           <p>
-            Um percurso de presença e elaboração inspirado pela Logoterapia e
-            pela Análise Existencial. Cada processo acontece em seu próprio
-            ritmo, sem uma sequência rígida ou respostas prontas
+            Em meu trabalho, construo um percurso de presença e elaboração
+            inspirado pela Logoterapia e pela Análise Existencial. Acompanho
+            cada processo em seu próprio ritmo, sem uma sequência rígida ou
+            respostas prontas
           </p>
         </div>
 

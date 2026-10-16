@@ -21,8 +21,8 @@ export function PracticeResources({
           <p className="section-kicker">Recursos e próximos passos</p>
           <h2>Continue no seu ritmo</h2>
           <p>
-            Acesse um material de autoconhecimento ou consulte diretamente os
-            horários disponíveis para atendimento online
+            Acesse um material de autoconhecimento ou consulte diretamente
+            minha agenda de atendimento online
           </p>
         </div>
 

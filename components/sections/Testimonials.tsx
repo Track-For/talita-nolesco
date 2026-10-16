@@ -162,7 +162,7 @@ export function Testimonials({ approved }: { approved: boolean }) {
 
           <div className="testimonials-gallery__intro">
             <p className="section-kicker">Relatos compartilhados</p>
-            <h2 id="testimonials-title">Palavras de quem viveu esse processo</h2>
+            <h2 id="testimonials-title">Palavras compartilhadas comigo</h2>
             <p>Mensagens compartilhadas com identidade preservada</p>
           </div>
 
@@ -198,7 +198,7 @@ export function Testimonials({ approved }: { approved: boolean }) {
         <div className="section-frame testimonials-layout">
           <div className="testimonials-intro" data-reveal>
             <p className="section-kicker">Relatos compartilhados</p>
-            <h2 id="testimonials-title">Palavras de quem viveu esse processo</h2>
+            <h2 id="testimonials-title">Palavras compartilhadas comigo</h2>
             <p>Mensagens compartilhadas com identidade preservada</p>
           </div>
 
